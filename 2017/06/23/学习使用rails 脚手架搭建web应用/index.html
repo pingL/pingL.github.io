@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>PingL 的 平常</title>
+  <meta name="author" content="pingL">
+   <meta name="description" content="—06/28/2017进度更新 —-
+更改名称Heroku rename pingl-sample-777使用 HTML5 可以定义一个包括徽标、页头、页脚和主体内容的网站布局；
+为了用起来方便，可以使用 Rails 局部视图把部分结构放到单独的文件中；
+在 CSS 中可以使用类和 ID 编写样式；">
+  
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="PingL 的 平常"/>
+ <meta property="og:image" content="undefined"/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="PingL 的 平常" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-06-22T17:08:34.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-06-23
+</time>
+
+
+
+
+
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <p>—06/28/2017进度更新 —-</p>
+<h2 id="更改名称Heroku-rename-pingl-sample-777"><a href="#更改名称Heroku-rename-pingl-sample-777" class="headerlink" title="更改名称Heroku rename pingl-sample-777"></a>更改名称Heroku rename pingl-sample-777</h2><p>使用 HTML5 可以定义一个包括徽标、页头、页脚和主体内容的网站布局；</p>
+<p>为了用起来方便，可以使用 Rails 局部视图把部分结构放到单独的文件中；</p>
+<p>在 CSS 中可以使用类和 ID 编写样式；</p>
+<p>Bootstrap 框架能快速实现设计精美的网站；</p>
+<p>使用 Sass 和 Asset Pipeline 能去除 CSS 中的重复，还能打包静态资源文件，提高在生产环境中的使用效率；</p>
+<p>在 Rails 中可以自己定义路由规则，得到具名路由；</p>
+<h2 id="集成测试能高效模拟浏览器中的点击操作。"><a href="#集成测试能高效模拟浏览器中的点击操作。" class="headerlink" title="集成测试能高效模拟浏览器中的点击操作。"></a>集成测试能高效模拟浏览器中的点击操作。</h2><p>添加了集成测试框架： rails-test-integration</p>
+<p>我们在布局中加入了几个链接，最好再编写一些测试，确保链接正常。我们可以在浏览器中手动测试，先访问首页，然后点击其他链接，不过这么做很快就会变得繁琐。所以我们要使用集成测试，编写端到端测试完成这些操作。首先，生成测试模板，名为 site_layout：</p>
+<p>针对布局中链接的测试，要检查网站的 HTML 结构，步骤如下：</p>
+<p>访问根路径（首页）；</p>
+<p>确认使用正确的模板渲染；</p>
+<p>检查指向首页、“帮助”页面、“关于”页面和“联系”页面的地址是否正确。</p>
+<p>$ rails test:integration //只执行集成测试，green后<br>$ rails test</p>
+<hr>
+<p>学习有好多天了，中间有几个地方卡住了，不过总算是搞清楚为什么，也解决了问题，总体来说还是顺利的。今天回顾下过程，以及记录遇到的问题及解决办法。</p>
+<p>刚开始接触rails ，还好找到一个非常实用的教程，首先搭建推荐环境。</p>
+<p>— 编译器Atom 、版本控制git、脚手架rails、云服务Heroku</p>
+<p>案例中通过创建类似微博等功能来讲解如何使用rails，介绍了MVC模型，转移数据库提供给线上使用，</p>
+<p>创建应用</p>
+<p>绑定git方便版本控制，</p>
+<p>使用 git remote -v 查看当前应用的git使用地址，是否和线上环境一致。</p>
+<p>rails console 控制台命令交互，创建数据表逻辑，</p>
+<p> Heroku账号，</p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        © pingL 2016-2017
+    </div>
+    <div class="secondrow">
+        <a href="">
+        平林的世界
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
