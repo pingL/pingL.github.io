@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="google-site-verification" content="" />
+  
+  <title>版本控制与部署</title>
+  <meta name="author" content="pingL">
+   <meta name="description" content="在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。
+
+
+一、使用 ">
+  
+
+  <meta property="og:title" content="版本控制与部署"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:site_name" content="PingL 的 平常"/>
+ <meta property="og:image" content="undefined"/>
+  
+  <link href="/apple-touch-icon-precomposed.png" sizes="180x180" rel="apple-touch-icon-precomposed">
+  <link rel="alternate" href="/atom.xml" title="PingL 的 平常" type="application/atom+xml">
+  <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/m.min.css">
+  <link rel="icon" type="image/x-icon" href="/css/images/bitbug_favicon.ico">
+</head>
+
+<body>
+  <a id="top"></a>
+  <div id='wx_pic' style='display:none;'><img src='/wx_share.png'/></div>
+  <div id="main">
+    <div class="behind">
+      <div class="back">
+        <a href="/" class="black-color"><i class="fa fa-times" aria-hidden="true"></i></a>
+      </div>
+      <div class="description">
+        &nbsp;
+      </div>
+    </div>
+    <div class="container">
+      
+
+  <article class="standard post">
+    <div class="title">
+      
+  
+    <h1 class="page-title center">
+        版本控制与部署
+    </h1>
+  
+
+
+    </div>
+    <div class="meta center">
+      
+<time datetime="2017-07-04T04:31:29.000Z">
+  <i class="fa fa-calendar"></i>&nbsp;
+  2017-07-04
+</time>
+
+
+
+
+
+
+    
+    &nbsp;
+    <i class="fa fa-tag"></i>&nbsp;
+    <a href="/tags/git/">git</a>·<a href="/tags/heroku/">heroku</a>·<a href="/tags/bitbucket/">bitbucket</a>
+
+
+    </div>
+    <hr>
+    <div class="picture-container">
+      
+    </div>
+    <blockquote>
+<blockquote>
+<p>在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。</p>
+</blockquote>
+</blockquote>
+<h3 id="一、使用-Git-做版本控制"><a href="#一、使用-Git-做版本控制" class="headerlink" title="一、使用 Git 做版本控制"></a>一、使用 Git 做版本控制</h3><h4 id="1-1-安装设置"><a href="#1-1-安装设置" class="headerlink" title="1.1 安装设置"></a>1.1 安装设置</h4><p>1.1.1 <code>$ rails _5.1.1_ new appname</code>// Rails 版本来创建应用的文件结构</p>
+<p>创建完新的Rails应用后，下一步使用Bundle安装和引入所需的gem，</p>
+<p>1.1.2 更改Sqlite3 gem 的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">group :development, :test do</div><div class="line">  gem &apos;sqlite3&apos;, &apos;1.3.12&apos;</div><div class="line">  gem &apos;byebug&apos;,  &apos;9.0.0&apos;, platform: :mri</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>修改了应用默认使用的gem就需要再次使用<code>bundle install</code>。</p>
+<p><code>rails tset</code> （测试<br><code>rails server</code> （ 本地运行 </p>
+<p>1.1.3 创建基本的项目后添加Git</p>
+<p><code>$ git init</code> （初始化仓库<br><code>$ git add -A</code> （项目中的所有文件都放到仓库中</p>
+<blockquote>
+<blockquote>
+<p>这个命令会把当前目录中的所有文件都放到仓库中，但是匹配特殊文件 .gitignore中模式的文件除外。rails new 命令会自动生成一个适用于 Rails 项目的 .gitignore 文件，此外你还可以添加其他模式,加入仓库的文件一开始位于暂存区（staging area），这一区用于存放待提交的内容。执行 status 命令可以查看暂存区中有哪些文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">➜  sample_app git:(sign-up) ✗ git status</div><div class="line">On branch sign-up</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   app/assets/stylesheets/custom.scss</div><div class="line">	modified:   app/controllers/user_controller.rb</div><div class="line">	modified:   app/helpers/user_helper.rb</div><div class="line">	modified:   app/views/layouts/application.html.erb</div><div class="line">	modified:   app/views/user/new.html.erb</div><div class="line">	modified:   config/routes.rb</div><div class="line">Untracked files:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</div><div class="line">	app/views/user/show.html.erb</div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<p>1.1.4 保存改动命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commint -m &quot;Initialize repository&quot;</div></pre></td></tr></table></figure>
+<h4 id="1-2-Bitbucket"><a href="#1-2-Bitbucket" class="headerlink" title="1.2 Bitbucket"></a>1.2 Bitbucket</h4><blockquote>
+<blockquote>
+<p>我们已经把项目纳入 Git 版本控制系统了，接下来可以把代码推送到 Bitbucket。这是一个专门用来托管和分享 Git 仓库的网站。</p>
+</blockquote>
+</blockquote>
+<p>1.2.1 设置账号公钥<br><code>$ cat ~/.ssh/id_rsa.pub</code> 输入文本粘贴到账号SSH公钥</p>
+<p>在bitbucket创建新的仓库获得仓库地址后<br><code>$ git remote add origin git@bitbucket.org:railstutorial/hello_app.git</code></p>
+<p>第一部分就完成了。</p>
+<h4 id="1-3-分支、编辑、提交、合并"><a href="#1-3-分支、编辑、提交、合并" class="headerlink" title="1.3 分支、编辑、提交、合并"></a>1.3 分支、编辑、提交、合并</h4><p>1.3.1<br>创建一个新主题分支（topic branch）：<br><code>$ git checkout -b modify-README</code><br>1.3.2<br>编辑一些文件后，在Atom编译器里文件名会显示黄色。<br>添加新的文件后，文件名是绿色。<br>1.3.3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Improve the README file&quot;</div></pre></td></tr></table></figure></p>
+<p>1.3.4 切换<br>我们已经改完了，现在可以把结果合并（merge）到主分支了：<br><code>$ git checkout master</code> 切换到主分支<br><code>$ git merge modify-README</code>  合并分支</p>
+<p>1.3.5 合并</p>
+<blockquote>
+<blockquote>
+<p>  合并之后，我们可以清理一下分支——如果主题分支不用了，可以使用 git branch -d 命令将其删除：<br><code>$ git branch -d modify-README</code></p>
+<p> 还可以使用 git branch -D 命令放弃主题分支中的改动：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">仅作演示之用，如果没搞砸，千万别这么做</div><div class="line">$ git checkout -b topic-branch</div><div class="line">$ really screw up the branch</div><div class="line">$ git add -A</div><div class="line">$ git commit -a -m &quot;Make major mistake&quot;</div><div class="line">$ git checkout master</div><div class="line">$ git branch -D topic-branch</div></pre></td></tr></table></figure>
+<p>1.3.6 推送<br><code>$ git push</code> </p>
+<h3 id="二、部署"><a href="#二、部署" class="headerlink" title="二、部署"></a>二、部署</h3><h4 id="2-1-搭建-Heroku-部署环境"><a href="#2-1-搭建-Heroku-部署环境" class="headerlink" title="2.1 搭建 Heroku 部署环境"></a>2.1 搭建 Heroku 部署环境</h4><blockquote>
+<blockquote>
+<p>Heroku 使用 PostgreSQL[18] 数据库，因此我们要在生产环境安装 pg gem，这样 Rails 才能与 PostgreSQL 通信：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">group :production do</div><div class="line">  gem &apos;pg&apos;, &apos;0.21.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>为了准备好部署环境，下面要执行 bundle install 命令，并且指定一个特殊的选项，禁止在本地安装生产环境使用的 gem（即 pg）：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bundle install --without production</div></pre></td></tr></table></figure>
+<p>提交这次改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Update Gemfile for Heroku&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="2-2-Heroku-部署应用"><a href="#2-2-Heroku-部署应用" class="headerlink" title="2.2 Heroku 部署应用"></a>2.2 Heroku 部署应用</h4><p><code>$ heroku login</code>  输入账号邮箱及密码<br><code>$ heroku keys:add</code> 添加密钥<br><code>$ heroku create</code>  在Heroku中创建应用并返回地址<br><code>$ git push heroku master</code>  使用 Git 把 Heroku推送到主分支 中</p>
+
+
+  </article>
+  </script>
+    <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <div class="busuanzi center">
+    page PV:&nbsp;<span id="busuanzi_value_page_pv"></span>&nbsp;・&nbsp;
+    site PV:&nbsp;<span id="busuanzi_value_site_pv"></span>&nbsp;・&nbsp;
+    site UV:&nbsp;<span id="busuanzi_value_site_uv"></span>
+  </div>
+
+
+
+
+    </div>
+  </div>
+  <footer class="page-footer"><div class="clearfix">
+</div>
+<div class="right-foot container">
+    <div class="firstrow">
+        <a href="#top" target="_self">
+        <i class="fa fa-arrow-right"></i>
+        </a>
+        © pingL 2016-2017
+    </div>
+    <div class="secondrow">
+        <a href="">
+        平林的世界
+        </a>
+    </div>
+</div>
+<div class="clearfix">
+</div>
+</footer>
+  <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+
+// disqus scripts
+
+
+// dropdown scripts
+$(".dropdown").click(function(event) {
+  var current = $(this);
+  event.stopPropagation();
+  $(current).children(".dropdown-content")[($(current).children(".dropdown-content").hasClass("open"))?'removeClass':'addClass']("open")
+});
+$(document).click(function(){
+    $(".dropdown-content").removeClass("open");
+})
+
+var path = "/search.xml";
+searchFunc(path, 'local-search-input', 'local-search-result');
+
+</script>
+
+</body>
+</html>
