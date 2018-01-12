@@ -1,0 +1,823 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git,heroku,bitbucket," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。   一、使用 Git 做版本控制1.1 安装设置1.1.1 $ rails _5.1.1_ new appna">
+<meta name="keywords" content="git,heroku,bitbucket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="版本控制与部署">
+<meta property="og:url" content="http://yoursite.com/2017/07/04/版本控制与部署/index.html">
+<meta property="og:site_name" content="平林的平常">
+<meta property="og:description" content="在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。   一、使用 Git 做版本控制1.1 安装设置1.1.1 $ rails _5.1.1_ new appna">
+<meta property="og:updated_time" content="2017-07-04T06:06:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="版本控制与部署">
+<meta name="twitter:description" content="在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。   一、使用 Git 做版本控制1.1 安装设置1.1.1 $ rails _5.1.1_ new appna">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/07/04/版本控制与部署/"/>
+
+
+
+
+
+  <title>版本控制与部署 | 平林的平常</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">平林的平常</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/04/版本控制与部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="平林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平林的平常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">版本控制与部署</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T12:31:29+08:00">
+                2017-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/07/04/版本控制与部署/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/07/04/版本控制与部署/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<blockquote>
+<p>在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。</p>
+</blockquote>
+</blockquote>
+<h3 id="一、使用-Git-做版本控制"><a href="#一、使用-Git-做版本控制" class="headerlink" title="一、使用 Git 做版本控制"></a>一、使用 Git 做版本控制</h3><h4 id="1-1-安装设置"><a href="#1-1-安装设置" class="headerlink" title="1.1 安装设置"></a>1.1 安装设置</h4><p>1.1.1 <code>$ rails _5.1.1_ new appname</code>// Rails 版本来创建应用的文件结构</p>
+<p>创建完新的Rails应用后，下一步使用Bundle安装和引入所需的gem，</p>
+<p>1.1.2 更改Sqlite3 gem 的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">group :development, :test do</div><div class="line">  gem &apos;sqlite3&apos;, &apos;1.3.12&apos;</div><div class="line">  gem &apos;byebug&apos;,  &apos;9.0.0&apos;, platform: :mri</div><div class="line">end</div></pre></td></tr></table></figure></p>
+<p>修改了应用默认使用的gem就需要再次使用<code>bundle install</code>。</p>
+<p><code>rails tset</code> （测试<br><code>rails server</code> （ 本地运行 </p>
+<p>1.1.3 创建基本的项目后添加Git</p>
+<p><code>$ git init</code> （初始化仓库<br><code>$ git add -A</code> （项目中的所有文件都放到仓库中</p>
+<blockquote>
+<blockquote>
+<p>这个命令会把当前目录中的所有文件都放到仓库中，但是匹配特殊文件 .gitignore中模式的文件除外。rails new 命令会自动生成一个适用于 Rails 项目的 .gitignore 文件，此外你还可以添加其他模式,加入仓库的文件一开始位于暂存区（staging area），这一区用于存放待提交的内容。执行 status 命令可以查看暂存区中有哪些文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">➜  sample_app git:(sign-up) ✗ git status</div><div class="line">On branch sign-up</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   app/assets/stylesheets/custom.scss</div><div class="line">	modified:   app/controllers/user_controller.rb</div><div class="line">	modified:   app/helpers/user_helper.rb</div><div class="line">	modified:   app/views/layouts/application.html.erb</div><div class="line">	modified:   app/views/user/new.html.erb</div><div class="line">	modified:   config/routes.rb</div><div class="line">Untracked files:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</div><div class="line">	app/views/user/show.html.erb</div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div></pre></td></tr></table></figure></p>
+</blockquote>
+</blockquote>
+<p>1.1.4 保存改动命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commint -m &quot;Initialize repository&quot;</div></pre></td></tr></table></figure>
+<h4 id="1-2-Bitbucket"><a href="#1-2-Bitbucket" class="headerlink" title="1.2 Bitbucket"></a>1.2 Bitbucket</h4><blockquote>
+<blockquote>
+<p>我们已经把项目纳入 Git 版本控制系统了，接下来可以把代码推送到 Bitbucket。这是一个专门用来托管和分享 Git 仓库的网站。</p>
+</blockquote>
+</blockquote>
+<p>1.2.1 设置账号公钥<br><code>$ cat ~/.ssh/id_rsa.pub</code> 输入文本粘贴到账号SSH公钥</p>
+<p>在bitbucket创建新的仓库获得仓库地址后<br><code>$ git remote add origin git@bitbucket.org:railstutorial/hello_app.git</code></p>
+<p>第一部分就完成了。</p>
+<h4 id="1-3-分支、编辑、提交、合并"><a href="#1-3-分支、编辑、提交、合并" class="headerlink" title="1.3 分支、编辑、提交、合并"></a>1.3 分支、编辑、提交、合并</h4><p>1.3.1<br>创建一个新主题分支（topic branch）：<br><code>$ git checkout -b modify-README</code><br>1.3.2<br>编辑一些文件后，在Atom编译器里文件名会显示黄色。<br>添加新的文件后，文件名是绿色。<br>1.3.3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Improve the README file&quot;</div></pre></td></tr></table></figure></p>
+<p>1.3.4 切换<br>我们已经改完了，现在可以把结果合并（merge）到主分支了：<br><code>$ git checkout master</code> 切换到主分支<br><code>$ git merge modify-README</code>  合并分支</p>
+<p>1.3.5 合并</p>
+<blockquote>
+<blockquote>
+<p>  合并之后，我们可以清理一下分支——如果主题分支不用了，可以使用 git branch -d 命令将其删除：<br><code>$ git branch -d modify-README</code></p>
+<p> 还可以使用 git branch -D 命令放弃主题分支中的改动：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">仅作演示之用，如果没搞砸，千万别这么做</div><div class="line">$ git checkout -b topic-branch</div><div class="line">$ really screw up the branch</div><div class="line">$ git add -A</div><div class="line">$ git commit -a -m &quot;Make major mistake&quot;</div><div class="line">$ git checkout master</div><div class="line">$ git branch -D topic-branch</div></pre></td></tr></table></figure>
+<p>1.3.6 推送<br><code>$ git push</code> </p>
+<h3 id="二、部署"><a href="#二、部署" class="headerlink" title="二、部署"></a>二、部署</h3><h4 id="2-1-搭建-Heroku-部署环境"><a href="#2-1-搭建-Heroku-部署环境" class="headerlink" title="2.1 搭建 Heroku 部署环境"></a>2.1 搭建 Heroku 部署环境</h4><blockquote>
+<blockquote>
+<p>Heroku 使用 PostgreSQL[18] 数据库，因此我们要在生产环境安装 pg gem，这样 Rails 才能与 PostgreSQL 通信：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">group :production do</div><div class="line">  gem &apos;pg&apos;, &apos;0.21.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<p>为了准备好部署环境，下面要执行 bundle install 命令，并且指定一个特殊的选项，禁止在本地安装生产环境使用的 gem（即 pg）：</p>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bundle install --without production</div></pre></td></tr></table></figure>
+<p>提交这次改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Update Gemfile for Heroku&quot;</div></pre></td></tr></table></figure></p>
+<h4 id="2-2-Heroku-部署应用"><a href="#2-2-Heroku-部署应用" class="headerlink" title="2.2 Heroku 部署应用"></a>2.2 Heroku 部署应用</h4><p><code>$ heroku login</code>  输入账号邮箱及密码<br><code>$ heroku keys:add</code> 添加密钥<br><code>$ heroku create</code>  在Heroku中创建应用并返回地址<br><code>$ git push heroku master</code>  使用 Git 把 Heroku推送到主分支 中</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+<div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="平林 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的微信公众号，订阅我的博客！</div>
+</div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag"># git</a>
+          
+            <a href="/tags/heroku/" rel="tag"># heroku</a>
+          
+            <a href="/tags/bitbucket/" rel="tag"># bitbucket</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/03/Ruby-on-Rails-7/" rel="next" title="Ruby-on-Rails-7">
+                <i class="fa fa-chevron-left"></i> Ruby-on-Rails-7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/27/学习servlet遇到一些问题/" rel="prev" title="Servlet 一二点">
+                Servlet 一二点 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="平林" />
+          <p class="site-author-name" itemprop="name">平林</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/pingL/" target="_blank" title="基站">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  基站
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/zhaohengyi123" target="_blank" title="脸书">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  脸书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://i.youku.com/ambitiouscat?spm=a2hzp.8244740.0.0" target="_blank" title="优酷">
+                  
+                    <i class="fa fa-fw fa-youtube"></i>
+                  
+                  优酷
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、使用-Git-做版本控制"><span class="nav-number">1.</span> <span class="nav-text">一、使用 Git 做版本控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-安装设置"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 安装设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-Bitbucket"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Bitbucket</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-分支、编辑、提交、合并"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 分支、编辑、提交、合并</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、部署"><span class="nav-number">2.</span> <span class="nav-text">二、部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-搭建-Heroku-部署环境"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 搭建 Heroku 部署环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-Heroku-部署应用"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Heroku 部署应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">平林</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three.min.js"></script>
+
+  
+  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2017/07/04/版本控制与部署/';
+          this.page.identifier = '2017/07/04/版本控制与部署/';
+          this.page.title = '版本控制与部署';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    
+    
+
+    <!-- UY BEGIN -->
+  <div id="uyan_frame"></div>
+  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2154737"></script>
+  <!-- UY END -->
+
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
