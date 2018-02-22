@@ -251,6 +251,153 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="平林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平林的平常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/" itemprop="url">MysqlCookbook_使用Mysql客户端1/2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T22:40:22+08:00">
+                2018-02-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/22/MysqlCookbook-使用Mysql客户端1-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>#引言<br>MySQL数据库使用以mysqld服务器为中心的客户端——服务器架构。服务器是事实操作数据库的程序。客户端程序并不直接操作服务器。相反，它们使用SQL语句来向服务器传达你的意图。客户端程序被安装在你想访问MySQL的本地机器上，但服务器可以安装在任何地方，只要客户端能连接上。MySQL生来就是网络数据库系统，所以客户端能够和运行本机或任何其他机器上的服务器进行通信。可能因为多个不同目的而写出一些客户端，但每个客户端和服务器的交互都是先连接服务器，发送SQL语句到服务器来执行数据库操作，然后从服务器接收语句执行结果。</p>
+<p>这其中的一个客户端就包含在MySQL发布包中mysql程序。当交互使用时，mysql提示你输入一条语句，将其发送到MySQL服务器执行，然后显示结果。此项功能使mysql很有用，而且在你进行MySQL编程活动时也是一个颇有价值的工具，它可以你用script访问时帮你很方便地快速查看表结构等等。</p>
+<p>本章描述了mysql 的功能以便你能更高效地使用它。<br>    • 启动、停止mysql<br>    • 指定连接参数，使用可选择的文件<br>    • 设定你的PATH变量以便命令解释器能够找到mysql（以及其他MySQL程序）<br>    • 交互执行SQL语句，使用批量文件<br>    • 取消和编辑语句<br>    • 控制mysql输出格式</p>
+<p>本章前两节描述如何用mysql配置这些。作为示范目的，示例假设按照如下方式使用MySQL：<br>    • MySQL服务器运行在本机<br>    • MySQL用户名和密码分别为causer 和cbpass<br>    • 数据库名为cookbook</p>
+<p>#1.1建立MySQL用户账户<br>使用GRANT语句建立MySQL用户账户，然后账户的名字和密码与服务器建立连接，使用mysql客户端前需要启动相应服务。<br>% mysql -h localhost -p -u root<br>连接到MySQL服务器需要一个用户名和密码，你还可以指定服务器正运行的主机名称。如果你没有指定主机名，mysql会假定服务器运行在本机上。<br>mysql的参数包括<br>-h localhost  表示连接到运行于本机的MySQL服务器；<br>-p 用于告知mysql要提示输入密码，<br>-u root 表示作为MySQL的root用户连接</p>
+<p>mysql&gt; GRANT  ALL ON cookbook.* TO ‘cbuser’@’localhost’ IDENTIFIED BY ‘cbpass’;</p>
+<p>% mysql -h localhost -p -u cbuser</p>
+<p>#1.2创建数据库和样表<br>解决方案<br>使用 create database语句创建数据库，create table 语句创建你想用的每个表，用INSERT语句向表中添加数据行。</p>
+<p>创建数据库：<br>mysql&gt; create database cookbook;</p>
+<p>创建表：<br>首先将cookbook选定默认的数据库：<br>mysql&gt; USE cookbook;</p>
+<h2 id="1-3-启动和停止mysql"><a href="#1-3-启动和停止mysql" class="headerlink" title="#1.3 启动和停止mysql"></a>#1.3 启动和停止mysql</h2><p>mysqld start<br>mysql.server start    # 1. 启动<br>mysql.server stop     # 2. 停止</p>
+<h2 id="mysql-server-restart-3-重启"><a href="#mysql-server-restart-3-重启" class="headerlink" title="mysql.server restart  # 3. 重启"></a>mysql.server restart  # 3. 重启</h2><p>中止mysql回话： quit</p>
+<p>#1.4使用可选项文件来指定连接参数<br>通过设置选项文件my.cnf,使用默认用户登录，<br>配置教程<br><a href="http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/" target="_blank" rel="external">http://blog.neten.de/posts/2014/01/27/install-mysql-using-homebrew/</a><br>模板下载链接<br><a href="http://blog.neten.de/attachment/code/mysql/my.cnf.txt" target="_blank" rel="external">http://blog.neten.de/attachment/code/mysql/my.cnf.txt</a></p>
+<p>#1.5 保护选项文件以阻止其他用户读取</p>
+<p>#1.6 混合使用命令行和选项文件参数</p>
+<p>#1.7 找不到mysql时该怎么做</p>
+<p>#1.8 发起SQL语句<br>分号是最普遍的终结符，但你也可以使用\g （‘go’）</p>
+<p>#1.9 取消一部分输入的语句<br>一开始输入一条语句，但最终决定不执行它，使用你的行删除符或者\c来取消语句<br>mysql&gt; select *<br>    -&gt; from limbs<br>    -&gt; prig\c<br>mysql&gt;</p>
+<p>#1.10 重复和编辑SQL语句<br>如果输入的语句包含一个错误，使用mysql内建的输入行编辑能力。</p>
+<p>#1.11 自动完成数据库和表名<br>使用mysql的名称自动完成工具，输入部分的数据库，然后按下Tab键</p>
+<p>#1.12 让mysql从文件中读取文件<br>问题：你需要mysql从文件中读取语句以避免手工输入它们<br>解决方案：重定向mysql的输入，或者用source命令</p>
+<p>#1.13 让mysql从其他程序读取语句<br>问题：以另一个程序的输出作为mysql的输入<br>解决方案： 使用 pipe（管道）<br>展示mysql如何从文件中读取SQL语句：<br>% mysql cookbook &lt; limbs.sql</p>
+<p>#1.14 一行输入所有SQL<br>直接在mysql命令行中指定要执行的语句，mysql能从其参数列表中读取语句，<br>例如：查出limbs表中有多少行，运行一下命令：<br>$ mysql -e “select count(*) from limbs” cookbook</p>
+<p>要用此方式执行多条语句，以分号分隔即可：<br>$ mysql -e “select count(*) from limbs; select now()” cookbook</p>
+<p>#1.15使用拷贝粘贴作为mysql输入源<br>问题：你想利用你的图形用户界面（GUI）使mysql更易于使用。<br>解决方案：使用拷贝粘贴为mysql提供要执行的语句，这样就能利用你GUI能力为mysql展现的终端接口提供补充。<br>讨论：在Window环境下，拷贝粘贴非常有用，它能帮你一次运行多个程序并在它们之间传输信息。如果你在一个视窗打开包含语句的文档，你可以从那里拷贝语句然后将它们粘贴进你正运行mysql的视窗中。这和你自己手工输入语句并无二致，只是更快了，对于你频繁发出的语句，保持他们在一个独立的窗口中是一个很好的方法，这样就能确保他们总是触手可及。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/Mysql-cookbook-内容摘要/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1502,139 +1649,6 @@ return  connection;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/01/git-版本穿梭/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/01/git-版本穿梭/" itemprop="url">git 版本穿梭</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-01T23:34:10+08:00">
-                2017-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/01/git-版本穿梭/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/01/git-版本穿梭/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>提交上线了一个版本。后来在本地改动代码出错，找不到原因，决定下载在线上版本，<br>由于我改动代码未提交，所以可以回到改动前的版本，</p>
-<p>首先查看提交版本</p>
-<ul>
-<li>$ git log</li>
-<li>$ git log –pretty=oneline //查看时间线</li>
-<li>$ git reset –hard commit_id //最近的一次提交 commit_id:84077</li>
-</ul>
-<p>现在总结一下：</p>
-<p>HEAD指向的版本就是当前版本，因此，Git允许我们在版本的历史之间穿梭，使用命令<br>git reset –hard commit_id。</p>
-<p>穿梭前，用git log可以查看提交历史，以便确定要回退到哪个版本。</p>
-<p>要重返未来，用git reflog查看命令历史，以便确定要回到未来的哪个版本。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1684,7 +1698,7 @@ return  connection;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
