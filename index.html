@@ -251,6 +251,148 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="平林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平林的平常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/" itemprop="url">MysqlCookbook-使用Mysql客户端2-2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T16:37:22+08:00">
+                2018-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/02/25/MysqlCookbook-使用Mysql客户端2-2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h6 id="1-16-预防查询输出超出屏幕"><a href="#1-16-预防查询输出超出屏幕" class="headerlink" title="1.16 预防查询输出超出屏幕"></a>1.16 预防查询输出超出屏幕</h6><h6 id="1-17-发送查询输出到文件或程序"><a href="#1-17-发送查询输出到文件或程序" class="headerlink" title="1.17 发送查询输出到文件或程序"></a>1.17 发送查询输出到文件或程序</h6><p>让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道</p>
+<p>% mysql cookbook &lt; inputfile  &gt; outputfile </p>
+<h6 id="1-18-选择表格或制表符定界的查询输出格式"><a href="#1-18-选择表格或制表符定界的查询输出格式" class="headerlink" title="1.18 选择表格或制表符定界的查询输出格式"></a>1.18 选择表格或制表符定界的查询输出格式</h6><p>问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，<br>解决方案 ： 使用合适的命令选项来显示需要的格式<br>使用-t 或者（–table）选项来生成更具可读性的表格输出：<br>% mysql -t cookbook &lt; inputfile | lpr<br>% mysql -t cookbook &lt; inputfile | mail paul</p>
+<p>反向操作是在交互模式下生成批量输出，达到这点使用-B（或–batch）</p>
+<h6 id="1-19-指定任意的输出列分隔符"><a href="#1-19-指定任意的输出列分隔符" class="headerlink" title="1.19 指定任意的输出列分隔符"></a>1.19 指定任意的输出列分隔符</h6><p>问题： 你想mysql使用除了制表符外的定界符来生成语句输出<br>解决方案：mysql 自身并未提供设置输出定界符的功能，但你可以对mysql输出进行加工来重新格式化。</p>
+<h6 id="1-20-生成HTML或XML输出"><a href="#1-20-生成HTML或XML输出" class="headerlink" title="1.20 生成HTML或XML输出"></a>1.20 生成HTML或XML输出</h6><p>将查询结果转化成HTML或XML<br>使用 mysql -H 或 mysql -X</p>
+<p>例如：<br>% mysql  -e “select <em> from limbs where legs=0” cookbook<br>% mysql -H -e “select </em> from limbs where legs=0” cookbook</p>
+<h6 id="1-21-在查询输出中禁止列头部"><a href="#1-21-在查询输出中禁止列头部" class="headerlink" title="1.21 在查询输出中禁止列头部"></a>1.21 在查询输出中禁止列头部</h6><p>% mysql -e “select arms from limbs” cookbook | sumarize<br>要创建仅包含数据值的输出，就要  –skip-column-names 选项禁止列头部行：<br>% mysql  –skip-column-names -e “select arms from limbs” cookbook | sumarize<br>你也可通过两次指定“silent” 选项（-s 或 –silent）来达到和–skip-coumn-names 同等的效果：<br>% mysql -ss -e “select arms from limbs” cookbook | sumarize</p>
+<h6 id="1-22-使长输出行更具可读性"><a href="#1-22-使长输出行更具可读性" class="headerlink" title="1.22 使长输出行更具可读性"></a>1.22 使长输出行更具可读性</h6><p>问题：当你的一个查询生成了很长的输出行，它杂乱无章的出现在你的屏幕上<br>解决方案：使用垂直的输出格式<br>mysql&gt; show full columns from limbs;<br>+——-+————-+—————–+——+—–+———+——-+———————————+———+<br>| Field | Type        | Collation       | Null | Key | Default | Extra | Privileges                      | Comment |<br>+——-+————-+—————–+——+—–+———+——-+———————————+———+<br>| thing | varchar(20) | utf8_general_ci | YES  |     | NULL    |       | select,insert,update,references |         |<br>| legs  | int(11)     | NULL            | YES  |     | NULL    |       | select,insert,update,references |         |<br>| arms  | int(11)     | NULL            | YES  |     | NULL    |       | select,insert,update,references |         |<br>+——-+————-+—————–+——+—–+———+——-+———————————+———+</p>
+<p>为避免此问题，将每列值显示在单独的一行来生成“垂直的”输出。通过\G 而不是用字符a；或\g 来终止一条语句来实现的。<br>用垂直格式输出样式：<br>mysql&gt; show full columns from limbs\G;<br><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 1. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong><br>     Field: thing<br>      Type: varchar(20)<br> Collation: utf8_general_ci<br>      Null: YES<br>       Key:<br>   Default: NULL<br>     Extra:<br>Privileges: select,insert,update,references<br>   Comment:<br><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 2. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong><br>     Field: legs<br>      Type: int(11)<br> Collation: NULL<br>      Null: YES<br>       Key:<br>   Default: NULL<br>     Extra:<br>Privileges: select,insert,update,references<br>   Comment:<br><strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong> 3. row <strong><strong><strong><strong><strong><strong><em>*</em></strong></strong></strong></strong></strong></strong><br>     Field: arms<br>      Type: int(11)<br> Collation: NULL<br>      Null: YES<br>       Key:<br>   Default: NULL<br>     Extra:<br>Privileges: select,insert,update,references<br>   Comment:<br>3 rows in set (0.00 sec)</p>
+<p>ERROR:<br>No query specified</p>
+<h6 id="1-23控制mysql的繁冗级别"><a href="#1-23控制mysql的繁冗级别" class="headerlink" title="1.23控制mysql的繁冗级别"></a>1.23控制mysql的繁冗级别</h6><p>问题：你需要mysql产生更多的输出，或者相反<br>解决方案： 使用-v 或 -s 选项来获取更多或者更少<br>% echo “select now()” | mysql -v<br>% echo “select now()” | mysql -vv<br>% echo “select now()” | mysql -vvv<br>-v 和–verbose 相对的是 -s 和–silent ，它们也可以多次使用来达到叠加的效果</p>
+<h6 id="1-24记录交互式的mysql回话"><a href="#1-24记录交互式的mysql回话" class="headerlink" title="1.24记录交互式的mysql回话"></a>1.24记录交互式的mysql回话</h6><p>问题： 想保留一份在mysql会话中所做事情的记录<br>解决方案：创建一个tee文件<br>指定记录会话的文件名：<br>% mysql  –tee = tmp.out cookbook<br>如果只想记录会话的某个特定部分就很有用：<br>mysql&gt; \T tem.out<br>Logging to file ‘tem.out’<br>mysql&gt; \t<br>Outfile disabled.</p>
+<p>tem 文件包含你所输入的语句，以及这些语句的输出，所以它是一个保存完整记录的便捷方法。</p>
+<h6 id="1-25-以之前执行的语句创建mysql脚本"><a href="#1-25-以之前执行的语句创建mysql脚本" class="headerlink" title="1.25 以之前执行的语句创建mysql脚本"></a>1.25 以之前执行的语句创建mysql脚本</h6><h6 id="1-26-在SQL-语句中使用用户自定义的变量"><a href="#1-26-在SQL-语句中使用用户自定义的变量" class="headerlink" title="1.26 在SQL 语句中使用用户自定义的变量"></a>1.26 在SQL 语句中使用用户自定义的变量</h6><h6 id="1-27-为查询输出行计数"><a href="#1-27-为查询输出行计数" class="headerlink" title="1.27 为查询输出行计数"></a>1.27 为查询输出行计数</h6><p>记录查询结果的行数<br>对mysql的输出进行处理或者使用用户定义的变量<br>    •    % mysql –skip-column-names -e “SELECT thing, arms FROM limbs “ cookbook;<br>➜  MysqlFile mysql cookbook  –skip-column-names -e “select thing, arms FROM limbs” | cat -n<br>     1 human 2<br>     2 insect 0<br>     3 squid 10<br>     4 fish 0<br>     5 centipede 0<br>     6 table 0<br>     7 armchair 2<br>     8 phonograph 1<br>     9 tripod 0<br>    10 Peg Leg Pete 2<br>    11 space alien NULL</p>
+<pre><code>•    SELECT @n := @n + 1 AS rownum, thing, arms, legs FROM limbs;
+</code></pre><p>mysql&gt; SELECT @n := @n + 1 AS rownum, thing, arms, legs FROM limbs;<br>+——–+————–+——+——+<br>| rownum | thing        | arms | legs |<br>+——–+————–+——+——+<br>|      1 | human        |    2 |    2 |<br>|      2 | insect       |    0 |    6 |<br>|      3 | squid        |   10 |    0 |<br>|      4 | fish         |    0 |    0 |<br>|      5 | centipede    |    0 |  100 |<br>|      6 | table        |    0 |    4 |<br>|      7 | armchair     |    2 |    4 |<br>|      8 | phonograph   |    1 |    0 |<br>|      9 | tripod       |    0 |    3 |<br>|     10 | Peg Leg Pete |    2 |    1 |<br>|     11 | space alien  | NULL | NULL |<br>+——–+————–+——+——+<br>11 rows in set (0.01 sec)</p>
+<h6 id="1-28-将mysql用作计算器"><a href="#1-28-将mysql用作计算器" class="headerlink" title="1.28 将mysql用作计算器"></a>1.28 将mysql用作计算器</h6><p>将mysql用作计算器。MySQL并不要求每个SELECT语句都关联某个表，所以你可以选择任意表达式的结果</p>
+<h6 id="1-29-在Shell脚本中使用mysql"><a href="#1-29-在Shell脚本中使用mysql" class="headerlink" title="1.29 在Shell脚本中使用mysql"></a>1.29 在Shell脚本中使用mysql</h6><p>你想在一个shell脚本中调用mysql而不是交互式地使用它<br>-#!/bin/sh<br>-# mysql_uptime2.sh  报道服务器运行时间<br>mysql -e STATUS | grep “^Uptime”</p>
+<p>结果如下：<br> MysqlFile ./mysql_uptime2.sh<br>Uptime: 27 min 50 sec</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1504,149 +1646,6 @@ return  connection;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/03/Ruby-on-Rails-7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/03/Ruby-on-Rails-7/" itemprop="url">Ruby-on-Rails-7</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-03T00:17:14+08:00">
-                2017-07-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/03/Ruby-on-Rails-7/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/03/Ruby-on-Rails-7/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于不断的深入，遇到的问题也越来越难以解决。现在遇到的一个问题是，由于命名引起的，用户路径名应该使用users的，但是我误写成user，导致后面新建用户信息的注册表单报错，LOG信息如下：</p>
-<p>➜  sample_app git:(sign-up) ✗ rails test<br>Running via Spring preloader in process 18618</p>
-<h2 id="Run-options-–seed-28778"><a href="#Run-options-–seed-28778" class="headerlink" title="Run options: –seed 28778"></a>Run options: –seed 28778</h2><h1 id="Running"><a href="#Running" class="headerlink" title="Running:"></a>Running:</h1><p>….E</p>
-<p>Error:<br>UserControllerTest#test_should_get_new:<br>  ActionView::Template::Error: undefined method <code>users_path&#39; for #&lt;#&lt;Class:0x007fc8721ba2c8&gt;:0x007fc872179bd8&gt;
-  Did you mean?  user_path
-  app/views/user/new.html.erb:5:in _app_views_user_new_html_erb___12467323558183319_70249442303760&#39;
-  test/controllers/user_controller_test.rb:5:in</code>block in <class:usercontrollertest>‘</class:usercontrollertest></p>
-<p>bin/rails test test/controllers/user_controller_test.rb:4</p>
-<p>……….</p>
-<p>Finished in 0.443527s, 33.8198 runs/s, 51.8571 assertions/s.<br>15 runs, 23 assertions, 0 failures, 1 errors, 0 skips</p>
-<hr>
-<p>查看教程中估计和各个有关系：<br>7.3 节会介绍，Rails 会以这些 name 属性的值为键，用户输入的内容为值，构成一个名为 params 的散列，用来创建用户。</p>
-<p>另外一个重要的标签是 form 自身。Rails 使用 @user 对象创建这个 form 元素，因为每个 Ruby 对象都知道它所属的类（4.4.1 节），所以 Rails 知道 @user 所属的类是 User，而且，@user 是一个新用户，因此 Rails 知道要使用 post 方法——这正是创建新对象所需的 HTTP 请求（参见旁注 3.2）：</p>
-<p><form action="/users" class="new_user" id="new_user" method="post"><br>这里的 class 和 id 属性并不重要，重要的是 action=”/users” 和 method=”post”。设定这两个属性后，Rails 会向 /users 发送 POST 请求。接下来的两节会介绍这个请求的效果。</form></p>
-<h3 id="涉及的目录及文件名"><a href="#涉及的目录及文件名" class="headerlink" title="涉及的目录及文件名"></a>涉及的目录及文件名</h3><ul>
-<li>routes.rb</li>
-<li>new.html.erb</li>
-<li>user.controller.rb</li>
-<li>custom.scss</li>
-</ul>
-<h3 id="下一步尝试解决办法"><a href="#下一步尝试解决办法" class="headerlink" title="下一步尝试解决办法"></a>下一步尝试解决办法</h3><p>目前能想到的就是，更改用户测试目录及用户功能目录。使系统或者是数据库对特殊路径名做出正确判断。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1696,7 +1695,7 @@ return  connection;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1740,6 +1739,7 @@ return  connection;
                 </a>
               </span>
             
+<<<<<<< HEAD
               <span class="links-of-author-item">
                 <a href="http://i.youku.com/ambitiouscat?spm=a2hzp.8244740.0.0" target="_blank" title="优酷">
                   
@@ -1753,6 +1753,8 @@ return  connection;
                 </a>
               </span>
             
+=======
+>>>>>>> bc829cfa4ee39efd2d46d9e138fa94b137b68827
           
         </div>
 
