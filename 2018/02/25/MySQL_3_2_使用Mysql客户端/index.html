@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MysqlCookbook-使用Mysql客户端2-2 | 平林的平常</title>
+  <title>MySQL_3_2_使用MySQL客户端 | 平林的平常</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile  1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要">
+  <meta name="description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile 1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MysqlCookbook-使用Mysql客户端2-2">
+<meta property="og:title" content="MySQL_3_2_使用MySQL客户端">
 <meta property="og:url" content="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/index.html">
 <meta property="og:site_name" content="平林的平常">
-<meta property="og:description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile  1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要">
+<meta property="og:description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile 1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要的">
 <meta property="og:updated_time" content="2018-02-25T08:37:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MysqlCookbook-使用Mysql客户端2-2">
-<meta name="twitter:description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile  1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要">
+<meta name="twitter:title" content="MySQL_3_2_使用MySQL客户端">
+<meta name="twitter:description" content="1.16 预防查询输出超出屏幕1.17 发送查询输出到文件或程序让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道 % mysql cookbook &amp;lt; inputfile  &amp;gt; outputfile 1.18 选择表格或制表符定界的查询输出格式问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，解决方案 ： 使用合适的命令选项来显示需要的">
   
     <link rel="alternate" href="/atom.xml" title="平林的平常" type="application/atom+xml">
   
@@ -83,7 +83,7 @@
     
   
     <h1 class="article-title" itemprop="name">
-      MysqlCookbook-使用Mysql客户端2-2
+      MySQL_3_2_使用MySQL客户端
     </h1>
   
 
@@ -104,7 +104,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h6 id="1-16-预防查询输出超出屏幕"><a href="#1-16-预防查询输出超出屏幕" class="headerlink" title="1.16 预防查询输出超出屏幕"></a>1.16 预防查询输出超出屏幕</h6><h6 id="1-17-发送查询输出到文件或程序"><a href="#1-17-发送查询输出到文件或程序" class="headerlink" title="1.17 发送查询输出到文件或程序"></a>1.17 发送查询输出到文件或程序</h6><p>让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道</p>
-<p>% mysql cookbook &lt; inputfile  &gt; outputfile </p>
+<p>% mysql cookbook &lt; inputfile  &gt; outputfile</p>
 <h6 id="1-18-选择表格或制表符定界的查询输出格式"><a href="#1-18-选择表格或制表符定界的查询输出格式" class="headerlink" title="1.18 选择表格或制表符定界的查询输出格式"></a>1.18 选择表格或制表符定界的查询输出格式</h6><p>问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，<br>解决方案 ： 使用合适的命令选项来显示需要的格式<br>使用-t 或者（–table）选项来生成更具可读性的表格输出：<br>% mysql -t cookbook &lt; inputfile | lpr<br>% mysql -t cookbook &lt; inputfile | mail paul</p>
 <p>反向操作是在交互模式下生成批量输出，达到这点使用-B（或–batch）</p>
 <h6 id="1-19-指定任意的输出列分隔符"><a href="#1-19-指定任意的输出列分隔符" class="headerlink" title="1.19 指定任意的输出列分隔符"></a>1.19 指定任意的输出列分隔符</h6><p>问题： 你想mysql使用除了制表符外的定界符来生成语句输出<br>解决方案：mysql 自身并未提供设置输出定界符的功能，但你可以对mysql输出进行加工来重新格式化。</p>
@@ -133,7 +133,7 @@
     
 
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/" data-id="cjgu6n59e00067ojrxyhwnb5l" class="article-share-link">
+      <a data-url="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/" data-id="cjgu71mh70007gejrg87wzo3l" class="article-share-link">
         <i class="fa fa-share"></i> Share
       </a>
       
@@ -148,14 +148,14 @@
   <li role="presentation">
     <a href="/2018/02/22/MySQL_3_1_基于客户端编程/" id="article-nav-older" class="article-nav-link-wrap">
       <i class="fa fa-chevron-left pull-left"></i>
-      <span class="article-nav-link-title">MysqlCookbook_使用Mysql客户端1/2</span>
+      <span class="article-nav-link-title">MySQL_3_1基于客户端编程</span>
     </a>
   </li>
   
   
   <li role="presentation">
     <a href="/2018/05/06/MySQL_4_从表中查询/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-link-title">MySQL_4_从表中查询.md</span>
+      <span class="article-nav-link-title">MySQL_4_从表中查询</span>
       <i class="fa fa-chevron-right pull-right"></i>
     </a>
   </li>
@@ -185,7 +185,7 @@
   
   <div class="sidebar-module">
     <h4>Tags</h4>
-    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mysql/">-mysql</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Android/">Android</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Chrome/">Chrome</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Dialog/">Dialog</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/IDLE/">IDLE</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Rails/">Rails</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Tcl-Tk/">Tcl/Tk</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Youtube/">Youtube</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/bitbucket/">bitbucket</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/git/">git</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/heroku/">heroku</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mysql/">mysql</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/servelt-tomcat-IntelliJIdea/">servelt tomcat IntelliJIdea</a><span class="sidebar-module-list-count">1</span></li></ul>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Android/">Android</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Chrome/">Chrome</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Dialog/">Dialog</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/IDLE/">IDLE</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Rails/">Rails</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Tcl-Tk/">Tcl/Tk</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Youtube/">Youtube</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/bitbucket/">bitbucket</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/git/">git</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/heroku/">heroku</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mysql/">mysql</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/servelt-tomcat-IntelliJIdea/">servelt tomcat IntelliJIdea</a><span class="sidebar-module-list-count">1</span></li></ul>
   </div>
 
 
@@ -194,7 +194,7 @@
   <div class="sidebar-module">
     <h4>Tag Cloud</h4>
     <p class="tagcloud">
-      <a href="/tags/mysql/" style="font-size: 10px;">-mysql</a> <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/IDLE/" style="font-size: 10px;">IDLE</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/Tcl-Tk/" style="font-size: 10px;">Tcl/Tk</a> <a href="/tags/Youtube/" style="font-size: 10px;">Youtube</a> <a href="/tags/bitbucket/" style="font-size: 10px;">bitbucket</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/heroku/" style="font-size: 10px;">heroku</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/servelt-tomcat-IntelliJIdea/" style="font-size: 10px;">servelt tomcat IntelliJIdea</a>
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/IDLE/" style="font-size: 10px;">IDLE</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/Tcl-Tk/" style="font-size: 10px;">Tcl/Tk</a> <a href="/tags/Youtube/" style="font-size: 10px;">Youtube</a> <a href="/tags/bitbucket/" style="font-size: 10px;">bitbucket</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/heroku/" style="font-size: 10px;">heroku</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/servelt-tomcat-IntelliJIdea/" style="font-size: 10px;">servelt tomcat IntelliJIdea</a>
     </p>
   </div>
 
@@ -213,23 +213,23 @@
     <ul class="sidebar-module-list">
       
         <li>
-          <a href="/2018/05/06/MySQL_5_表管理/">MySQL表管理</a>
+          <a href="/2018/05/06/MySQL_5_表管理/">MySQL_5_表管理</a>
         </li>
       
         <li>
-          <a href="/2018/05/06/MySQL_4_从表中查询/">MySQL_4_从表中查询.md</a>
+          <a href="/2018/05/06/MySQL_4_从表中查询/">MySQL_4_从表中查询</a>
         </li>
       
         <li>
-          <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/">MysqlCookbook-使用Mysql客户端2-2</a>
+          <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/">MySQL_3_2_使用MySQL客户端</a>
         </li>
       
         <li>
-          <a href="/2018/02/22/MySQL_3_1_基于客户端编程/">MysqlCookbook_使用Mysql客户端1/2</a>
+          <a href="/2018/02/22/MySQL_3_1_基于客户端编程/">MySQL_3_1基于客户端编程</a>
         </li>
       
         <li>
-          <a href="/2018/02/20/MySQL_2_2_内容摘要/">Mysql cookbook 内容摘要</a>
+          <a href="/2018/02/20/MySQL_2_2_内容摘要/">MySQL_2_2_内容摘要</a>
         </li>
       
     </ul>
