@@ -1,336 +1,107 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
-
-
-
-
-
-
-<meta property="og:type" content="website">
+  <title>平林的平常</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="平林的平常">
 <meta property="og:url" content="http://yoursite.com/index.html">
 <meta property="og:site_name" content="平林的平常">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平林的平常">
+  
+    <link rel="alternate" href="/atom.xml" title="平林的平常" type="application/atom+xml">
+  
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
 
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
+  <link rel="stylesheet" href="/css/styles.css">
+  
 
-
-
-  <link rel="canonical" href="http://yoursite.com/"/>
-
-
-
-
-
-  <title>平林的平常</title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
-
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">平林的平常</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+<body>
+  <nav class="navbar navbar-inverse">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
     </div>
-      
-        <p class="site-subtitle"></p>
-      
-  </div>
 
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="main-menu-navbar">
+      <ul class="nav navbar-nav">
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
+          <li><a class="active"
+                 href="/index.html">Home</a></li>
         
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
+          <li><a class=""
+                 href="/archives/">Archives</a></li>
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
+      </ul>
 
-      
-    </ul>
-  
-
-  
+      <!--
+      <ul class="nav navbar-nav navbar-right">
+        
+          <li><a href="/atom.xml" title="RSS Feed"><i class="fa fa-rss"></i></a></li>
+        
+      </ul>
+      -->
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
 </nav>
 
+  <div class="container">
+    <div class="blog-header">
+  <h1 class="blog-title">平林的平常</h1>
+  
+</div>
 
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+          
+  
+    <article id="post-MySQL_5_表管理" class="article article-type-post" itemscope itemprop="blogPost">
 
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
+  <header class="article-header">
     
-      
-
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/MySQL_5_表管理/">MySQL_5_表管理</a>
+    </h1>
   
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/MySQL_5_表管理/">
+  </header>
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/05/06/MySQL_5_表管理/" class="article-date"><time datetime="2018-05-06T01:27:47.000Z" itemprop="datePublished">2018-05-06</time></a>
+</div>
 
     
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/06/MySQL_5_表管理/" itemprop="url">MySQL表管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T09:27:47+08:00">
-                2018-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/06/MySQL_5_表管理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/06/MySQL_5_表管理/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <h1 id="4-0-引言"><a href="#4-0-引言" class="headerlink" title="4.0 引言"></a>4.0 引言</h1><p>本章内容主要包括如何创建以及迁移表：<br>    • 克隆表<br>    • 表间拷贝<br>    • 使用临时表<br>    • 生成唯一表名<br>    • 确定一张表使用什么存储引擎，或者把一张表转换到其他存储引擎。<br>要创建并装载本章示例<br>% myslq cookbook &lt; mail.sql</p>
+        <h1 id="4-0-引言"><a href="#4-0-引言" class="headerlink" title="4.0 引言"></a>4.0 引言</h1><p>本章内容主要包括如何创建以及迁移表：<br>    • 克隆表<br>    • 表间拷贝<br>    • 使用临时表<br>    • 生成唯一表名<br>    • 确定一张表使用什么存储引擎，或者把一张表转换到其他存储引擎。<br>要创建并装载本章示例<br>% myslq cookbook &lt; mail.sql</p>
 <h1 id="4-1-克隆表"><a href="#4-1-克隆表" class="headerlink" title="4.1 克隆表"></a>4.1 克隆表</h1><p>当你需要创建一个恰好与某个已有表结构一致的表。</p>
 <p>使用create table ··· like 语句来克隆表结构；使用insert into ··· select 语句克隆部分或者全部表数据：<br>create table new_table LIKE original_table；</p>
 <p>这样的到的新表和原表除了以下几点之外，在结构属性上一模一样：create table ····like 语句不克隆源表的外键定义，不克隆源表可能使用的data directory 和index directory 表选项。<br>如上方法生成的新表不包含任何数据，如果需要同时拷贝源表的数据，可以使用insert into ··· select 语句：<br>insert into new_table select * from original_table;</p>
@@ -369,128 +140,56 @@
 <p>就算你使用类似PID这样，对一个给定的脚本调用保证唯一的值来生成唯一的表名，所生成的表名仍有可以于现在的表名冲突，这样的情况可能出现在以前的一个脚本调用过程使用相同的PID，创建一个一样的表名，但这个进程在在删除所创建的临时表之外就崩溃了，另一个方面这样的表已经不再使用了，因为创建它的进程已经消失，这种情况如果这样的表确实存在，使用下面的语句安全的删除它；<br>drop  table if exists tbl_name;</p>
 <p>然后你就可以继续创建新表了。<br>连接标识符是唯一值的另一个来源，MySQL重用这些值，但是两个同时存在的服务器连接具有不同ID，执行下面的语句，获取你的连接ID：<br>select cinnection_ID();</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/06/MySQL_5_表管理/" data-id="cjgu71mhb000agejrery1sc32" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-MySQL_4_从表中查询" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/06/MySQL_4_从表中查询/">MySQL_4_从表中查询</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/05/06/MySQL_4_从表中查询/" class="article-date"><time datetime="2018-05-06T01:22:32.000Z" itemprop="datePublished">2018-05-06</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/MySQL_4_从表中查询/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/06/MySQL_4_从表中查询/" itemprop="url">MySQL_4_从表中查询.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T09:22:32+08:00">
-                2018-05-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/06/MySQL_4_从表中查询/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/05/06/MySQL_4_从表中查询/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <h1 id="3-0-引言"><a href="#3-0-引言" class="headerlink" title="3.0 引言"></a>3.0 引言</h1><p>select允许你对行查询的几个方面进行控制：<br>所要查询的表<br>所要查询的行和列<br>重命名查询结果列<br>对查询结果进行排序</p>
+        <h1 id="3-0-引言"><a href="#3-0-引言" class="headerlink" title="3.0 引言"></a>3.0 引言</h1><p>select允许你对行查询的几个方面进行控制：<br>所要查询的表<br>所要查询的行和列<br>重命名查询结果列<br>对查询结果进行排序</p>
 <h1 id="3-1-制定查询列-从指定列中查询"><a href="#3-1-制定查询列-从指定列中查询" class="headerlink" title="3.1 制定查询列/从指定列中查询"></a>3.1 制定查询列/从指定列中查询</h1><p>讨论 最简单的方法是使用 select <em> from tb_name 获取一个 数据库里的每一列信息，其中 “ </em> ” 说明对数据库中的所有列进行查询，但是查询结果不能安装用户指定的任意顺序显示，要达到这一目的，可以使用一下的语句指定查询列。<br>显示地查询列的另一个好处在于，在查询结果中可以只显示用户所关注的列，而不是显示每一个列的信息，例如：</p>
 <h1 id="3-2-指定查询行"><a href="#3-2-指定查询行" class="headerlink" title="3.2 指定查询行"></a>3.2 指定查询行</h1><p>使用where语句设定查询条件，使得查询结果只包含符合查询条件的行，例如指定查询生活在某个城市的客户信息，或者状态为“finished”的任务。<br>where srchost = ‘venus’;<br>where srchost like ‘s%’;<br>where srchost = ‘barb’ and dstuser = ‘tricia’;</p>
 <h1 id="3-3-格式化显示查询结果"><a href="#3-3-格式化显示查询结果" class="headerlink" title="3.3 格式化显示查询结果"></a>3.3 格式化显示查询结果</h1><p>问题：自定义查询结果（列名或者对应值）<br>使用AS name 子句来指定列别名</p>
@@ -523,129 +222,57 @@
 <p>这样的解决方法要求计算表中的总行数，然后还要计算从第几行开始返回结果，用户可能不想这么做，所以有了第二种方法：首先在一个子查询中使用limit子句取出所需的行，然后在外层查询中对该结果的排序，并返回用户。如下：<br>mysql&gt; select *from                                                                -&gt; (select name ,birth from profile order by birth desc limit 4) AS t<br>    -&gt; order by birth;<br>+——-+————+<br>| name  | birth      |<br>+——-+————+<br>| Aaron | 1968-09-17 |<br>| Nancy | 1969-09-30 |<br>| Sybil | 1970-04-13 |<br>| Ralph | 1973-11-02 |<br>+——-+————+<br>4 rows in set (0.00 sec)<br>(from : 后面加了空格再换行，粘贴后变的不规则)<br>在查询语句中，from 子句后面必须是表名，因此在上例中使用AS t 对子查询结果赋予别名，作为from的一个临时表名。</p>
 <h1 id="3-18从表达式中计算LIMIT值"><a href="#3-18从表达式中计算LIMIT值" class="headerlink" title="3.18从表达式中计算LIMIT值"></a>3.18从表达式中计算LIMIT值</h1><p>如何使用表达式计算LIMIT子句所使用的参数？<br>实际上，sql语句中，limit子句只能直接以数字作为参数，并不能使用表达式作为limit子句的参数，除非在应用程序中，使用用户程序语句计算出limit参数，然后再将结果插入到sql语句中。</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/06/MySQL_4_从表中查询/" data-id="cjgu71mh80008gejr5ur1rbq5" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-MySQL_3_2_使用Mysql客户端" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/25/MySQL_3_2_使用Mysql客户端/">MySQL_3_2_使用MySQL客户端</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/" class="article-date"><time datetime="2018-02-25T08:37:22.000Z" itemprop="datePublished">2018-02-25</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/25/MySQL_3_2_使用Mysql客户端/" itemprop="url">MysqlCookbook-使用Mysql客户端2-2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-25T16:37:22+08:00">
-                2018-02-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/25/MySQL_3_2_使用Mysql客户端/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <h6 id="1-16-预防查询输出超出屏幕"><a href="#1-16-预防查询输出超出屏幕" class="headerlink" title="1.16 预防查询输出超出屏幕"></a>1.16 预防查询输出超出屏幕</h6><h6 id="1-17-发送查询输出到文件或程序"><a href="#1-17-发送查询输出到文件或程序" class="headerlink" title="1.17 发送查询输出到文件或程序"></a>1.17 发送查询输出到文件或程序</h6><p>让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道</p>
-<p>% mysql cookbook &lt; inputfile  &gt; outputfile </p>
+        <h6 id="1-16-预防查询输出超出屏幕"><a href="#1-16-预防查询输出超出屏幕" class="headerlink" title="1.16 预防查询输出超出屏幕"></a>1.16 预防查询输出超出屏幕</h6><h6 id="1-17-发送查询输出到文件或程序"><a href="#1-17-发送查询输出到文件或程序" class="headerlink" title="1.17 发送查询输出到文件或程序"></a>1.17 发送查询输出到文件或程序</h6><p>让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道</p>
+<p>% mysql cookbook &lt; inputfile  &gt; outputfile</p>
 <h6 id="1-18-选择表格或制表符定界的查询输出格式"><a href="#1-18-选择表格或制表符定界的查询输出格式" class="headerlink" title="1.18 选择表格或制表符定界的查询输出格式"></a>1.18 选择表格或制表符定界的查询输出格式</h6><p>问题：当你想获得制表符定界的输出时，mysql却生成表格式的输出，或者相反，<br>解决方案 ： 使用合适的命令选项来显示需要的格式<br>使用-t 或者（–table）选项来生成更具可读性的表格输出：<br>% mysql -t cookbook &lt; inputfile | lpr<br>% mysql -t cookbook &lt; inputfile | mail paul</p>
 <p>反向操作是在交互模式下生成批量输出，达到这点使用-B（或–batch）</p>
 <h6 id="1-19-指定任意的输出列分隔符"><a href="#1-19-指定任意的输出列分隔符" class="headerlink" title="1.19 指定任意的输出列分隔符"></a>1.19 指定任意的输出列分隔符</h6><p>问题： 你想mysql使用除了制表符外的定界符来生成语句输出<br>解决方案：mysql 自身并未提供设置输出定界符的功能，但你可以对mysql输出进行加工来重新格式化。</p>
@@ -665,128 +292,56 @@
 <h6 id="1-29-在Shell脚本中使用mysql"><a href="#1-29-在Shell脚本中使用mysql" class="headerlink" title="1.29 在Shell脚本中使用mysql"></a>1.29 在Shell脚本中使用mysql</h6><p>你想在一个shell脚本中调用mysql而不是交互式地使用它<br>-#!/bin/sh<br>-# mysql_uptime2.sh  报道服务器运行时间<br>mysql -e STATUS | grep “^Uptime”</p>
 <p>结果如下：<br> MysqlFile ./mysql_uptime2.sh<br>Uptime: 27 min 50 sec</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/" data-id="cjgu71mh70007gejrg87wzo3l" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-MySQL_3_1_基于客户端编程" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/22/MySQL_3_1_基于客户端编程/">MySQL_3_1基于客户端编程</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/02/22/MySQL_3_1_基于客户端编程/" class="article-date"><time datetime="2018-02-22T14:40:22.000Z" itemprop="datePublished">2018-02-22</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/MySQL_3_1_基于客户端编程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/22/MySQL_3_1_基于客户端编程/" itemprop="url">MysqlCookbook_使用Mysql客户端1/2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T22:40:22+08:00">
-                2018-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/22/MySQL_3_1_基于客户端编程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/22/MySQL_3_1_基于客户端编程/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>MySQL数据库使用以mysqld服务器为中心的客户端——服务器架构。服务器是事实操作数据库的程序。客户端程序并不直接操作服务器。相反，它们使用SQL语句来向服务器传达你的意图。客户端程序被安装在你想访问MySQL的本地机器上，但服务器可以安装在任何地方，只要客户端能连接上。MySQL生来就是网络数据库系统，所以客户端能够和运行本机或任何其他机器上的服务器进行通信。可能因为多个不同目的而写出一些客户端，但每个客户端和服务器的交互都是先连接服务器，发送SQL语句到服务器来执行数据库操作，然后从服务器接收语句执行结果。</p>
+        <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>MySQL数据库使用以mysqld服务器为中心的客户端——服务器架构。服务器是事实操作数据库的程序。客户端程序并不直接操作服务器。相反，它们使用SQL语句来向服务器传达你的意图。客户端程序被安装在你想访问MySQL的本地机器上，但服务器可以安装在任何地方，只要客户端能连接上。MySQL生来就是网络数据库系统，所以客户端能够和运行本机或任何其他机器上的服务器进行通信。可能因为多个不同目的而写出一些客户端，但每个客户端和服务器的交互都是先连接服务器，发送SQL语句到服务器来执行数据库操作，然后从服务器接收语句执行结果。</p>
 <p>这其中的一个客户端就包含在MySQL发布包中mysql程序。当交互使用时，mysql提示你输入一条语句，将其发送到MySQL服务器执行，然后显示结果。此项功能使mysql很有用，而且在你进行MySQL编程活动时也是一个颇有价值的工具，它可以你用script访问时帮你很方便地快速查看表结构等等。</p>
 <p>本章描述了mysql 的功能以便你能更高效地使用它。<br>    • 启动、停止mysql<br>    • 指定连接参数，使用可选择的文件<br>    • 设定你的PATH变量以便命令解释器能够找到mysql（以及其他MySQL程序）<br>    • 交互执行SQL语句，使用批量文件<br>    • 取消和编辑语句<br>    • 控制mysql输出格式</p>
 <p>本章前两节描述如何用mysql配置这些。作为示范目的，示例假设按照如下方式使用MySQL：<br>    • MySQL服务器运行在本机<br>    • MySQL用户名和密码分别为causer 和cbpass<br>    • 数据库名为cookbook</p>
@@ -810,374 +365,164 @@
 <p>要用此方式执行多条语句，以分号分隔即可：<br>$ mysql -e “select count(*) from limbs; select now()” cookbook</p>
 <h1 id="1-15-使用拷贝粘贴作为mysql输入源"><a href="#1-15-使用拷贝粘贴作为mysql输入源" class="headerlink" title="1.15 使用拷贝粘贴作为mysql输入源"></a>1.15 使用拷贝粘贴作为mysql输入源</h1><p>问题：你想利用你的图形用户界面（GUI）使mysql更易于使用。<br>解决方案：使用拷贝粘贴为mysql提供要执行的语句，这样就能利用你GUI能力为mysql展现的终端接口提供补充。<br>讨论：在Window环境下，拷贝粘贴非常有用，它能帮你一次运行多个程序并在它们之间传输信息。如果你在一个视窗打开包含语句的文档，你可以从那里拷贝语句然后将它们粘贴进你正运行mysql的视窗中。这和你自己手工输入语句并无二致，只是更快了，对于你频繁发出的语句，保持他们在一个独立的窗口中是一个很好的方法，这样就能确保他们总是触手可及。</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
-      
+    
 
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/22/MySQL_3_1_基于客户端编程/" data-id="cjgu71mh40005gejrge2ld14p" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
       
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
-      
-      
-        <div class="post-eof"></div>
-      
+
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-MySQL_2_2_内容摘要" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/20/MySQL_2_2_内容摘要/">MySQL_2_2_内容摘要</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/02/20/MySQL_2_2_内容摘要/" class="article-date"><time datetime="2018-02-20T08:49:51.000Z" itemprop="datePublished">2018-02-20</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本书的读者对象<br>本书对于任何想使用Mysql的人都有用，从想使用数据库来为Blog或Wiki等个人项目服务的个人用户到专业数据库和web开发者。<br>内容摘要<br>使用本书的另一个方法就是脑海里不带着任何特定问题通读它。同样能给你以帮助，因为你会深入地理解Mysql能做什么，所以我建议你能偶尔翻阅本书。<br>第1章<br>使用Mysql应用程序，描述如何使用标准的Mysql命令行客户端，通常是人们所使用的第一或主要的Mysql接口，所以了解如何使用它的功能相当重要。使用该程序你的可以交互地发起查询并查看其结果，所以适合快速试验。<br>第2章<br>编写基于Mysql的程序，阐述Mysql编程的基本要素：如何连接服务器，发起查询，取回结果，以及处理错误。它还讨论在查询中如何处理特殊字符和NULL值；如何编写库文件来封装公共操作代码，描述收集构造服务器连接所需参数的不同方法。<br>第3章<br>从表中查询数据，涵盖了SELECT语句的多个方面，而select语句是从Mysql服务器查询数据的主要手段：指定你想检索的列和行，进行比较，处理NULL值，以及选中查询结果的某个区域。<br>第4章<br>表管理，包括表克隆，将结果集拷贝到其他表，使用临时表，以及检查或改变某个表的存储引擎等。<br>第5章<br>描述如何处理字符串数据。它涵盖字符集和字符序、字符串比较、处理大小写敏感问题、模式匹配、分解和组合字符串，以及执行FULLTEXT搜索。<br>第6章<br>使用日期和时间，揭示如何使用时间相关的数据。描述Mysql的日期格式以及如何以其他格式来显示日期值。它还包括如何使用Mysql特定的TIMESTAMP数据类型，如何设置时区，如何在不同时间单位进行转换，如何执行日期算数操作来计算时间间隔或者从一个日期来生成另一个日期，以及闰年计算等。<br>第7章<br>排序查询结果，描述如何以你想要的顺序放置查询结果行。包括指定排序方向，处理NULL值，解决字符串大小写敏感问题，以及根据日期或部分列值排序问题。如何对特定类型的值进行排序，例如域名、IP、ENUM（枚举）值。<br>第8章<br>生成摘要，阐述用于评估一系列数的一般性特征的技术，例如某个数据值是多少或者它的最小值、最大值或平均值是多少。<br>第9章<br>获取和使用原数据，讨论如何获取查询返回数据的信息，例如结果集的行数和列数，或者每列的名称和类型。它还揭示如何询问Mysql那些数据库和表可用，或者查明表结构。<br>第10章<br>数据导入导出，描述如何在Mysql和其他程序间传输信息。这包括将文件转换成另一种，去除或重排数据文件中的列，检查并检验数据，改写如日期类型等常以多种格式出现的值，以及当你用LOAD DATA将数值载入Mysql中时如何确定如何确定哪些数值会导致问题。<br>第11章<br>生成和使用序列，讨论AUTO_INCREMENT列，Mysql生成序列号的机制，它揭示了如何生成新的序列值或如何确定最新值，如何重新排一列，如何在一个定值开始序列，以及如何建立一个表使它能同时维护多个序列值。揭示如何使用AUTO_INCREMENT值来维护表间的主从关系，包括一些需要避免的陷阱。<br>第12章<br>使用多重表，揭示了如何执行连接，是一种，将一个表的行和其他表的行联合起来的操作，比较表之间匹配与不匹配之处，如何生成主从列表和摘要，列举多对多关系，以及基于另一个表的内容来更新或删除一表中的行。<br>第13章<br>统计技术，如何生成描述性的统计表、频率分布、回归以及相关性。它还包括如何随机化一组行或从组中随机选取一行。<br>第14章<br>处理充分行，讨论如何识别、计算并移除重复行——如何避免它们的发生<br>第15章<br>执行事务，揭示如何处理必须作为一个单位一直执行的多条SQL语句，探讨如何控制Mysql的自动提交模式，以及如何提交或回滚事务，并阐述了一些能用非事务性的存储引擎的背景知识。<br>第16章<br>使用存储的程序、触发器和事件，描述了如何编写存储在服务器的存储函数和存储过程，当表被修改时激活的触发器，以及在预定的情况下执行的事件。<br>第17章<br>关于web中的介绍，让你可以着手编写基于Web的Mysql脚本。Web编程使你能从数据库内容生成动态页面或者收集信息存入你的数据库。如何配置Apache来运行Perl、Ruby、PHP和Python脚本，以及如何配置Tomcat使其运行用JSP标签写的Java脚本。<br>第18章<br>在Web页面中混合查询结果，如何使用查询结果生成不同类型的HTML结构，诸如段落、列表、表格、超链接和导航索引等。如何向Mysql中存储图片，以及以后怎么检索并显示它们，以及如何发送一份可下载的结果集到一个浏览器。如何使用模版包生成Web页面。<br>第19章<br>用Mysql处理Web输入，讨论如何获取Web上的用户输入并用它来创建新的数据库行或者作为执行查询的基础。主要负责表单处理，包括如何基于你的数据库中包含的信息创建表单元素，例如单选按钮、弹出菜单，或者复选框<br>第20章<br>使用基于Mysql的会话管理，描写如何编写能记住跨越多个请求的信息的Web应用，使用Mysql作为后端的存储。特别是在你想逐步收集信息或你需要基于用户先前的动作作出<br>决定时。</p>
+
+      
+    </div>
 
     
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/MySQL_2_2_内容摘要/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/MySQL_2_2_内容摘要/" itemprop="url">Mysql cookbook 内容摘要</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T16:49:51+08:00">
-                2018-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/20/MySQL_2_2_内容摘要/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/20/MySQL_2_2_内容摘要/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/20/MySQL_2_2_内容摘要/" data-id="cjgu71mh20004gejrmewsfgjn" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
-      
-      
 
-      
-        
-          
-            <p>本书的读者对象<br>本书对于任何想使用Mysql的人都有用，从想使用数据库来为Blog或Wiki等个人项目服务的个人用户到专业数据库和web开发者。<br>内容摘要<br>使用本书的另一个方法就是脑海里不带着任何特定问题通读它。同样能给你以帮助，因为你会深入地理解Mysql能做什么，所以我建议你能偶尔翻阅本书。<br>第1章<br>使用Mysql应用程序，描述如何使用标准的Mysql命令行客户端，通常是人们所使用的第一或主要的Mysql接口，所以了解如何使用它的功能相当重要。使用该程序你的可以交互地发起查询并查看其结果，所以适合快速试验。<br>第2章<br>编写基于Mysql的程序，阐述Mysql编程的基本要素：如何连接服务器，发起查询，取回结果，以及处理错误。它还讨论在查询中如何处理特殊字符和NULL值；如何编写库文件来封装公共操作代码，描述收集构造服务器连接所需参数的不同方法。<br>第3章<br>从表中查询数据，涵盖了SELECT语句的多个方面，而select语句是从Mysql服务器查询数据的主要手段：指定你想检索的列和行，进行比较，处理NULL值，以及选中查询结果的某个区域。<br>第4章<br>表管理，包括表克隆，将结果集拷贝到其他表，使用临时表，以及检查或改变某个表的存储引擎等。<br>第5章<br>描述如何处理字符串数据。它涵盖字符集和字符序、字符串比较、处理大小写敏感问题、模式匹配、分解和组合字符串，以及执行FULLTEXT搜索。<br>第6章<br>使用日期和时间，揭示如何使用时间相关的数据。描述Mysql的日期格式以及如何以其他格式来显示日期值。它还包括如何使用Mysql特定的TIMESTAMP数据类型，如何设置时区，如何在不同时间单位进行转换，如何执行日期算数操作来计算时间间隔或者从一个日期来生成另一个日期，以及闰年计算等。<br>第7章<br>排序查询结果，描述如何以你想要的顺序放置查询结果行。包括指定排序方向，处理NULL值，解决字符串大小写敏感问题，以及根据日期或部分列值排序问题。如何对特定类型的值进行排序，例如域名、IP、ENUM（枚举）值。<br>第8章<br>生成摘要，阐述用于评估一系列数的一般性特征的技术，例如某个数据值是多少或者它的最小值、最大值或平均值是多少。<br>第9章<br>获取和使用原数据，讨论如何获取查询返回数据的信息，例如结果集的行数和列数，或者每列的名称和类型。它还揭示如何询问Mysql那些数据库和表可用，或者查明表结构。<br>第10章<br>数据导入导出，描述如何在Mysql和其他程序间传输信息。这包括将文件转换成另一种，去除或重排数据文件中的列，检查并检验数据，改写如日期类型等常以多种格式出现的值，以及当你用LOAD DATA将数值载入Mysql中时如何确定如何确定哪些数值会导致问题。<br>第11章<br>生成和使用序列，讨论AUTO_INCREMENT列，Mysql生成序列号的机制，它揭示了如何生成新的序列值或如何确定最新值，如何重新排一列，如何在一个定值开始序列，以及如何建立一个表使它能同时维护多个序列值。揭示如何使用AUTO_INCREMENT值来维护表间的主从关系，包括一些需要避免的陷阱。<br>第12章<br>使用多重表，揭示了如何执行连接，是一种，将一个表的行和其他表的行联合起来的操作，比较表之间匹配与不匹配之处，如何生成主从列表和摘要，列举多对多关系，以及基于另一个表的内容来更新或删除一表中的行。<br>第13章<br>统计技术，如何生成描述性的统计表、频率分布、回归以及相关性。它还包括如何随机化一组行或从组中随机选取一行。<br>第14章<br>处理充分行，讨论如何识别、计算并移除重复行——如何避免它们的发生<br>第15章<br>执行事务，揭示如何处理必须作为一个单位一直执行的多条SQL语句，探讨如何控制Mysql的自动提交模式，以及如何提交或回滚事务，并阐述了一些能用非事务性的存储引擎的背景知识。<br>第16章<br>使用存储的程序、触发器和事件，描述了如何编写存储在服务器的存储函数和存储过程，当表被修改时激活的触发器，以及在预定的情况下执行的事件。<br>第17章<br>关于web中的介绍，让你可以着手编写基于Web的Mysql脚本。Web编程使你能从数据库内容生成动态页面或者收集信息存入你的数据库。如何配置Apache来运行Perl、Ruby、PHP和Python脚本，以及如何配置Tomcat使其运行用JSP标签写的Java脚本。<br>第18章<br>在Web页面中混合查询结果，如何使用查询结果生成不同类型的HTML结构，诸如段落、列表、表格、超链接和导航索引等。如何向Mysql中存储图片，以及以后怎么检索并显示它们，以及如何发送一份可下载的结果集到一个浏览器。如何使用模版包生成Web页面。<br>第19章<br>用Mysql处理Web输入，讨论如何获取Web上的用户输入并用它来创建新的数据库行或者作为执行查询的基础。主要负责表单处理，包括如何基于你的数据库中包含的信息创建表单元素，例如单选按钮、弹出菜单，或者复选框<br>第20章<br>使用基于Mysql的会话管理，描写如何编写能记住跨越多个请求的信息的Web应用，使用Mysql作为后端的存储。特别是在你想逐步收集信息或你需要基于用户先前的动作作出<br>决定时。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-MySQL_2_1_序言" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/19/MySQL_2_1_序言/">MySQL_2_1序言</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/02/19/MySQL_2_1_序言/" class="article-date"><time datetime="2018-02-19T15:30:06.000Z" itemprop="datePublished">2018-02-19</time></a>
+</div>
+
+    
+    
+
+  </div>
+  <div class="article-inner">
+
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.0 序言<br>你可以次从本书学的其他知识包括：<br>    · 如何使用SQL查询、排序和统计行<br>    · 如何发现两表之间匹配或不匹配的行<br>    · 如何执行一次事务<br>    · 如何计算日期或时间的间隔，包括计算年龄<br>    · 如何识别或移除重复行<br>    · 如何将图片存入Mysql并在网页中查询出来以供显示<br>    · 如何合理使用LOAD DATA 读取你的数据文件或者查明文件里的哪些值不正确<br>    · 如何使用strict模式来阻止错误数据进入你的数据库中<br>    · 如何将一个表或者一个数据库拷贝到另一个服务器<br>    · 如何生成序列值以用作唯一的行标识符<br>    · 如何编写存储过程和函数<br>    · 如何将视图用在“虚拟表”<br>    · 如何设置触发器，使其在你插入或更新表行时被激活来执行特定的数据处理操作<br>    · 如何创建按照计划执行的数据库事件<br>了解如何使用Mysql的其中一个方面是理解怎么和服务器进行通信，也就是如何使用SQL格式化查询语言。因此本书的一个重点就是使用SQL来阐明回答特定类型问题的查询。学习使用SQL的一个有用工具是包含在Mysql发行包中的mysql客户端。<br>但仅仅发挥SQL查询能力还不够，从数据库中获取的信息需要进一步处理或者以特定的方式展现。如果有复杂相互关系的查询时，譬如你将一次查询的结果作为其他查询的基础时该怎么办？ 或者你需要生成特定格式需求的报表时该怎么办？这些问题将我们带到本书的另一个重点上——如何通过应用程序接口（API）来编写和Mysql服务器交互的程序。当你了解如何在编程语言的上下文中使用Mysql时，你就获得如以下方式开发Mysql潜力的能力：<br>    · 记住某次查询的结果，并在以后的某个时刻使用它<br>    · 充分发挥通用编程语言的功能。这就使你可以基于查询的成功或失败，或者基于返回行的内容作出决定，然后采取行动<br>    · 随心所欲地格式化并显示查询的结果，如果你正在编写一个命令行脚本，你可以生成普通文本；如果是一个基于Web的脚本，你同样可以生成一个HTML表格，如果它是一个提取信息用于传输到其他系统的应用，你可以生成一个XML形式的数据文件<br>1.1</p>
+
+      
+    </div>
 
     
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/MySQL_2_1_序言/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/19/MySQL_2_1_序言/" itemprop="url">Mysqlcookbook 序言</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T23:30:06+08:00">
-                2018-02-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/19/MySQL_2_1_序言/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/19/MySQL_2_1_序言/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/02/19/MySQL_2_1_序言/" data-id="cjgu71mh10003gejrfqefueq2" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
-      
-      
 
-      
-        
-          
-            <p>1.0 序言<br>你可以次从本书学的其他知识包括：<br>    · 如何使用SQL查询、排序和统计行<br>    · 如何发现两表之间匹配或不匹配的行<br>    · 如何执行一次事务<br>    · 如何计算日期或时间的间隔，包括计算年龄<br>    · 如何识别或移除重复行<br>    · 如何将图片存入Mysql并在网页中查询出来以供显示<br>    · 如何合理使用LOAD DATA 读取你的数据文件或者查明文件里的哪些值不正确<br>    · 如何使用strict模式来阻止错误数据进入你的数据库中<br>    · 如何将一个表或者一个数据库拷贝到另一个服务器<br>    · 如何生成序列值以用作唯一的行标识符<br>    · 如何编写存储过程和函数<br>    · 如何将视图用在“虚拟表”<br>    · 如何设置触发器，使其在你插入或更新表行时被激活来执行特定的数据处理操作<br>    · 如何创建按照计划执行的数据库事件<br>了解如何使用Mysql的其中一个方面是理解怎么和服务器进行通信，也就是如何使用SQL格式化查询语言。因此本书的一个重点就是使用SQL来阐明回答特定类型问题的查询。学习使用SQL的一个有用工具是包含在Mysql发行包中的mysql客户端。<br>但仅仅发挥SQL查询能力还不够，从数据库中获取的信息需要进一步处理或者以特定的方式展现。如果有复杂相互关系的查询时，譬如你将一次查询的结果作为其他查询的基础时该怎么办？ 或者你需要生成特定格式需求的报表时该怎么办？这些问题将我们带到本书的另一个重点上——如何通过应用程序接口（API）来编写和Mysql服务器交互的程序。当你了解如何在编程语言的上下文中使用Mysql时，你就获得如以下方式开发Mysql潜力的能力：<br>    · 记住某次查询的结果，并在以后的某个时刻使用它<br>    · 充分发挥通用编程语言的功能。这就使你可以基于查询的成功或失败，或者基于返回行的内容作出决定，然后采取行动<br>    · 随心所欲地格式化并显示查询的结果，如果你正在编写一个命令行脚本，你可以生成普通文本；如果是一个基于Web的脚本，你同样可以生成一个HTML表格，如果它是一个提取信息用于传输到其他系统的应用，你可以生成一个XML形式的数据文件<br>1.1</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-学习使用rails 脚手架搭建web应用" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/12/学习使用rails 脚手架搭建web应用/">(no title)</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/01/12/学习使用rails 脚手架搭建web应用/" class="article-date"><time datetime="2018-01-12T15:18:31.100Z" itemprop="datePublished">2018-01-12</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/学习使用rails 脚手架搭建web应用/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/学习使用rails 脚手架搭建web应用/" itemprop="url">未命名</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T23:18:31+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/12/学习使用rails 脚手架搭建web应用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/12/学习使用rails 脚手架搭建web应用/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <p>—06/28/2017进度更新 —-</p>
+        <p>—06/28/2017进度更新 —-</p>
 <h2 id="更改名称Heroku-rename-pingl-sample-777"><a href="#更改名称Heroku-rename-pingl-sample-777" class="headerlink" title="更改名称Heroku rename pingl-sample-777"></a>更改名称Heroku rename pingl-sample-777</h2><p>使用 HTML5 可以定义一个包括徽标、页头、页脚和主体内容的网站布局；</p>
 <p>为了用起来方便，可以使用 Rails 局部视图把部分结构放到单独的文件中；</p>
 <p>在 CSS 中可以使用类和 ID 编写样式；</p>
@@ -1202,128 +547,56 @@
 <p>rails console 控制台命令交互，创建数据表逻辑，</p>
 <p> Heroku账号，</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/12/学习使用rails 脚手架搭建web应用/" data-id="cjgu71mho000rgejr1tpnwtuf" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/12/hello-world/">Hello World</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/01/12/hello-world/" class="article-date"><time datetime="2018-01-12T15:18:31.099Z" itemprop="datePublished">2018-01-12</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/12/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/12/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-12T23:18:31+08:00">
-                2018-01-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/12/hello-world/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/12/hello-world/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
@@ -1333,128 +606,56 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/12/hello-world/" data-id="cjgu71mhj000lgejrtu3pv07l" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
       
 
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-获取Youtube视频高清封面" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/07/获取Youtube视频高清封面/">获取Youtube视频高清封面</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2018/01/07/获取Youtube视频高清封面/" class="article-date"><time datetime="2018-01-07T10:11:37.000Z" itemprop="datePublished">2018-01-07</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/07/获取Youtube视频高清封面/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/07/获取Youtube视频高清封面/" itemprop="url">获取Youtube视频高清封面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-07T18:11:37+08:00">
-                2018-01-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/01/07/获取Youtube视频高清封面/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/01/07/获取Youtube视频高清封面/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <blockquote>
+        <blockquote>
 <p>大家在Youtube上顺利搬砖之后会遇到一个问题，例如缺少该视频精美的封面,国外的视频制作人都会在封面上制作有趣并且符合视频内容的图片。今天就遇到这个需求，方法也是参考网络众多大牛的，我再重新画个轮子。具体操作如下。</p>
 </blockquote>
 <p>准备工具<br>1、梯子<br>2、Google chrome</p>
@@ -1463,223 +664,104 @@
 <h1 id="Step3"><a href="#Step3" class="headerlink" title="Step3"></a>Step3</h1><p>点击该链接后页面将显示封面，此时的图片是缩略图，还不符合我们高清的图片。<br>接着在地址栏现有链接里更改一个英文单词:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hqdefault.jpp</div><div class="line">changes to</div><div class="line">maxresdefault.jpg</div></pre></td></tr></table></figure></p>
 <p>改完后回车，链接将重新加载，得到高清原图，<br>如图3<br><img src="https://ws1.sinaimg.cn/large/006tNc79gy1fn88ipek4dj31kw0v9e81.jpg" alt=""><br>最后右键将图片存储到本地，就完成整个获取过程。</p>
 
-          
-        
       
     </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+    
       
 
-      
+    
 
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/01/07/获取Youtube视频高清封面/" data-id="cjgu71mhp000ugejrqokbmvmz" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
       
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Chrome/">Chrome</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Youtube/">Youtube</a></li></ul>
 
-      
-      
-        <div class="post-eof"></div>
-      
+
     </footer>
-  </article>
+  </div>
+  
+</article>
 
+
+
+  
+    <article id="post-如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？" class="article article-type-post" itemscope itemprop="blogPost">
+
+  <header class="article-header">
+    
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/">如何解决Mac版关于python3.5.X的Tcl/Tk (8.5.9) 的警告？</a>
+    </h1>
+  
+
+
+  </header>
+
+  <div class="article-meta">
+    <div class="article-datetime">
+  <a href="/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/" class="article-date"><time datetime="2017-12-24T02:47:07.000Z" itemprop="datePublished">2017-12-24</time></a>
+</div>
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/" itemprop="url">如何解决Mac版关于python3.5.X的Tcl/Tk (8.5.9) 的警告？</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-24T10:47:07+08:00">
-                2017-12-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
     
 
-    <div class="post-body" itemprop="articleBody">
+  </div>
+  <div class="article-inner">
 
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
-          
-            <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><blockquote>
+        <h4 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h4><blockquote>
 <p>WARNING: The version of Tcl/Tk (8.5.9) in use may be unstable. Visit <a href="http://www.python.org/download/mac/tcltk/" target="_blank" rel="external">http://www.python.org/download/mac/tcltk/</a> for current information. - </p>
 </blockquote>
 <h4 id="分析：这个警告导致无法在IDLE编辑器上输入中文"><a href="#分析：这个警告导致无法在IDLE编辑器上输入中文" class="headerlink" title="分析：这个警告导致无法在IDLE编辑器上输入中文"></a>分析：这个警告导致无法在IDLE编辑器上输入中文</h4><h4 id="解决办法：指示安装相应的Tk版本-如-：-8-5-18"><a href="#解决办法：指示安装相应的Tk版本-如-：-8-5-18" class="headerlink" title="解决办法：指示安装相应的Tk版本 如 ： 8.5.18"></a>解决办法：指示安装相应的Tk版本 如 ： 8.5.18</h4><p>下载地址：<a href="http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-macosx10.5-i386-x86_64-threaded.dmg" target="_blank" rel="external">Download and Install Tcl: ActiveTcl</a><br>在国内下载速度过慢直接百度网盘下载<a href="https://pan.baidu.com/s/1geUPMcr" target="_blank" rel="external">ActiveTcl8.5.18.0.298892-macosx10.5-i386-x86_64-threaded.dmg</a>，原文件下载时间 2017-12-24 12:00</p>
 <h4 id="结果：警告消失，可以在IDLE里直接输入中文字体。"><a href="#结果：警告消失，可以在IDLE里直接输入中文字体。" class="headerlink" title="结果：警告消失，可以在IDLE里直接输入中文字体。"></a>结果：警告消失，可以在IDLE里直接输入中文字体。</h4><p>如图<br><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fmrqke4mmoj30xk0f2acz.jpg" alt=""></p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
 
     
-  </section>
+      
+
+    
+
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/24/如何解决Mac版关于python3-5-X的Tcl-Tk-8-5-9-的警告？/" data-id="cjgu71mhk000ngejrbl6olt3q" class="article-share-link">
+        <i class="fa fa-share"></i> Share
+      </a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/IDLE/">IDLE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/">Python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tcl-Tk/">Tcl/Tk</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
 
 
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
+  <div id="page-nav">
+    <nav><ul class="pagination"><li class="disabled"><span class="page-prev"><i class="fa fa-chevron-left"></i> Prev</a></li><li class="active"><span class="page-number">1</span></li><li><a class="page-number" href="/page/2/">2</a></li><li><a class="page-next" rel="next" href="/page/2/">Next <i class="fa fa-chevron-right"></i></a></li></ul></nav>
   </div>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
 
-      
 
-      
-
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="平林" />
-          <p class="site-author-name" itemprop="name">平林</p>
-           
-              <p class="site-description motion-element" itemprop="description"></p>
-          
         </div>
-        <nav class="site-state motion-element">
-
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           
-            <div class="site-state-item site-state-posts">
-              <a href="/archives">
-                <span class="site-state-item-count">18</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
+  <div class="sidebar-module sidebar-module-inset">
+  <h4>About</h4>
+  <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
 
-          
-
+<<<<<<< HEAD
           
             
             
@@ -1773,168 +855,90 @@
 
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
+=======
+>>>>>>> 8ad81cc8238b7fe9dbab33bf086c413a14271088
 </div>
 
 
-        
+  
 
-        
-      </div>
-    </footer>
 
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
+  
+  <div class="sidebar-module">
+    <h4>Tags</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Android/">Android</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Chrome/">Chrome</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Dialog/">Dialog</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/IDLE/">IDLE</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Python/">Python</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Rails/">Rails</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Tcl-Tk/">Tcl/Tk</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/Youtube/">Youtube</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/bitbucket/">bitbucket</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/git/">git</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/heroku/">heroku</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/mysql/">mysql</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/tags/servelt-tomcat-IntelliJIdea/">servelt tomcat IntelliJIdea</a><span class="sidebar-module-list-count">1</span></li></ul>
   </div>
 
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
 
 
   
+  <div class="sidebar-module">
+    <h4>Tag Cloud</h4>
+    <p class="tagcloud">
+      <a href="/tags/Android/" style="font-size: 10px;">Android</a> <a href="/tags/Chrome/" style="font-size: 10px;">Chrome</a> <a href="/tags/Dialog/" style="font-size: 10px;">Dialog</a> <a href="/tags/IDLE/" style="font-size: 10px;">IDLE</a> <a href="/tags/Python/" style="font-size: 10px;">Python</a> <a href="/tags/Rails/" style="font-size: 10px;">Rails</a> <a href="/tags/Tcl-Tk/" style="font-size: 10px;">Tcl/Tk</a> <a href="/tags/Youtube/" style="font-size: 10px;">Youtube</a> <a href="/tags/bitbucket/" style="font-size: 10px;">bitbucket</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/heroku/" style="font-size: 10px;">heroku</a> <a href="/tags/mysql/" style="font-size: 20px;">mysql</a> <a href="/tags/servelt-tomcat-IntelliJIdea/" style="font-size: 10px;">servelt tomcat IntelliJIdea</a>
+    </p>
+  </div>
 
+
+  
+  <div class="sidebar-module">
+    <h4>Archives</h4>
+    <ul class="sidebar-module-list"><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/05/">May 2018</a><span class="sidebar-module-list-count">2</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/02/">February 2018</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2018/01/">January 2018</a><span class="sidebar-module-list-count">3</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/12/">December 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/09/">September 2017</a><span class="sidebar-module-list-count">1</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/07/">July 2017</a><span class="sidebar-module-list-count">4</span></li><li class="sidebar-module-list-item"><a class="sidebar-module-list-link" href="/archives/2017/06/">June 2017</a><span class="sidebar-module-list-count">3</span></li></ul>
+  </div>
 
 
 
   
-  
+  <div class="sidebar-module">
+    <h4>Recents</h4>
+    <ul class="sidebar-module-list">
+      
+        <li>
+          <a href="/2018/05/06/MySQL_5_表管理/">MySQL_5_表管理</a>
+        </li>
+      
+        <li>
+          <a href="/2018/05/06/MySQL_4_从表中查询/">MySQL_4_从表中查询</a>
+        </li>
+      
+        <li>
+          <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/">MySQL_3_2_使用MySQL客户端</a>
+        </li>
+      
+        <li>
+          <a href="/2018/02/22/MySQL_3_1_基于客户端编程/">MySQL_3_1基于客户端编程</a>
+        </li>
+      
+        <li>
+          <a href="/2018/02/20/MySQL_2_2_内容摘要/">MySQL_2_2_内容摘要</a>
+        </li>
+      
+    </ul>
+  </div>
 
 
 
-
-
-
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three.min.js"></script>
-
-  
-  <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
-
-
-
-  
-  
+        </div>
+    </div>
+  </div>
+  <footer class="blog-footer">
+  <div class="container">
+    <div id="footer-info" class="inner">
+      &copy; 2018 平林<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
 
   
 
-  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" integrity="sha384-8gBf6Y4YYq7Jx97PIqmTwLPin4hxIzQw5aDmUg/DDhul9fFpbbLcLh3nTIIDJKhx" crossorigin="anonymous"></script>
 
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
-
-
-
-  
-
-
-  
-
-    
-      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
-    
-
-    
-
-  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 
 
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-    
-    
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
+<script src="/js/script.js"></script>
 
 </body>
 </html>
