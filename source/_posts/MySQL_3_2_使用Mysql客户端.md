@@ -1,5 +1,5 @@
 ---
-title: MysqlCookbook-使用Mysql客户端2-2
+title: MySQL_3_2_使用MySQL客户端
 date: 2018-02-25 16:37:22
 updated: 2018-02-25 16:37:22
 tags:
@@ -10,7 +10,7 @@ tags:
  
 让mysql输出到其他地方而非屏幕，重定向mysql的输出，或者使用管道
  
-% mysql cookbook < inputfile  > outputfile 
+% mysql cookbook < inputfile  > outputfile
  
 ###### 1.18 选择表格或制表符定界的查询输出格式
  
@@ -166,4 +166,3 @@ mysql -e STATUS | grep "^Uptime"
 结果如下：
  MysqlFile ./mysql_uptime2.sh 
 Uptime: 27 min 50 sec
-

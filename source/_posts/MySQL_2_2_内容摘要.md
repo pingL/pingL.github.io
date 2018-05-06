@@ -1,5 +1,5 @@
 ---
-title: Mysql cookbook 内容摘要
+title: MySQL_2_2_内容摘要
 date: 2018-02-20 16:49:51
 updated: 2018-02-20 16:49:51
 tags:

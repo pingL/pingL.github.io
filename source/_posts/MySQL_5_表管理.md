@@ -1,5 +1,5 @@
 ---
-title: MySQL表管理
+title: MySQL_5_表管理
 date: 2018-05-06 09:27:47
 updated: 2018-05-06 09:27:47
 tags:

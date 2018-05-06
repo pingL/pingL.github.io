@@ -1,5 +1,5 @@
 ---
-title: MySQL_4_从表中查询.md
+title: MySQL_4_从表中查询
 date: 2018-05-06 09:22:32
 updated: 2018-05-06 09:22:32
 tags:
