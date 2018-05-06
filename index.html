@@ -251,7 +251,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/MySQL_5_表管理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="平林">
@@ -270,7 +270,321 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/" itemprop="url">MysqlCookbook-使用Mysql客户端2-2</a></h1>
+                <a class="post-title-link" href="/2018/05/06/MySQL_5_表管理/" itemprop="url">MySQL表管理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T09:27:47+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/06/MySQL_5_表管理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/06/MySQL_5_表管理/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="4-0-引言"><a href="#4-0-引言" class="headerlink" title="4.0 引言"></a>4.0 引言</h1><p>本章内容主要包括如何创建以及迁移表：<br>    • 克隆表<br>    • 表间拷贝<br>    • 使用临时表<br>    • 生成唯一表名<br>    • 确定一张表使用什么存储引擎，或者把一张表转换到其他存储引擎。<br>要创建并装载本章示例<br>% myslq cookbook &lt; mail.sql</p>
+<h1 id="4-1-克隆表"><a href="#4-1-克隆表" class="headerlink" title="4.1 克隆表"></a>4.1 克隆表</h1><p>当你需要创建一个恰好与某个已有表结构一致的表。</p>
+<p>使用create table ··· like 语句来克隆表结构；使用insert into ··· select 语句克隆部分或者全部表数据：<br>create table new_table LIKE original_table；</p>
+<p>这样的到的新表和原表除了以下几点之外，在结构属性上一模一样：create table ····like 语句不克隆源表的外键定义，不克隆源表可能使用的data directory 和index directory 表选项。<br>如上方法生成的新表不包含任何数据，如果需要同时拷贝源表的数据，可以使用insert into ··· select 语句：<br>insert into new_table select * from original_table;</p>
+<p>如果只想复制源表的部分数据到新表，可以在完成复制sql语句中加上相应的where子句来指定需要复制的行，例如，下面的语句根据mail表克隆了mail2，并将mail表中发送人为barb的数据行复制到mail2中：<br>mysql&gt; create table mail2 like mail;<br>Query OK, 0 rows affected (0.04 sec)</p>
+<p>mysql&gt; insert into mail2 select * from mail where srcuser = ‘barb’;<br>Query OK, 3 rows affected (0.02 sec)<br>Records: 3  Duplicates: 0  Warnings: 0</p>
+<p>mysql&gt; select * from mail2;<br>+———————+———+———+———+———+——-+<br>| t                   | srcuser | srchost | dstuser | dsthost | size  |<br>+———————+———+———+———+———+——-+<br>| 2014-05-11 10:15:08 | barb    | saturn  | tricia  | mars    | 58274 |<br>| 2014-05-12 18:59:18 | barb    | saturn  | tricia  | venus   |   271 |<br>| 2014-05-14 14:42:21 | barb    | venus   | barb    | venus   | 98151 |<br>+———————+———+———+———+———+——-+<br>3 rows in set (0.00 sec)</p>
+<h1 id="4-2-将查询结果保存到表中"><a href="#4-2-将查询结果保存到表中" class="headerlink" title="4.2 将查询结果保存到表中"></a>4.2 将查询结果保存到表中</h1><p>问题：如何将select 语句查询的结果保存到另一张表中，而不是直接返回给用户。<br>解决方案：如果用来保存查询结果的表已经存在，可以使用 insert into ··· select 语句将查询结果插入表中，如果所要使用的表还不存在，需要使用 create table ···select 语句根据查询结果新建一张表。<br>讨论：mysql通常将select查询结果直接返回给用户，例如，当你在mysql客户端上执行了一条sql 语句，数据库服务器将处理结果返回给mysql客户端，紧接着，客户端将结果显示在屏幕上，也可以选择将select语句的查询结果保存在表中，这在有些情况下也是非常有用的，例如：<br>    • 用来复制一张表的全部或者部分数据，例如，在编写数据库相关的应用程序时，如果用户程序需要处理某张表，处于安全起见，那么可以复制该表用于开发和调试，这样不用担心程序开发过程中错误地修改了表；当所要处理的表数据量很大时，在开发过程中所用的临时表只需要复制实际使用表的部分数据，这样可以减少数据库交互所用的时间，从而提高开发效率。<br>    • 如果数据装载操作基于可能是错误的数据，可以将新的数据行暂时存到临时表中，然后对数据进行检查，并在必要的时候修改错误的数据，直到对所装载的数据满意之后，再将改行由临时表拷贝到主表中。<br>    • 有的应用程序同时维护着两个表，一个很大的存储表用于保存数据，和一个较小的工作表。应用程序频繁地将数据插入工作表中，并定时地将数据从工作表复制到存储表，同时清空工作表。<br>    • 如果你打算在同一个表重复多次数据摘要操作，首先查询一次摘要信息并保存到另一张临时表中，以后用这张临时表进行数据分析，这比每一次都在原始数据表上重复进行开销很大的摘要操作更高效。<br>本节讨论如何将查询结果保存在一张表中，在例子中使用src_tb1 来指代源表，从其中查询数据；使用dst_tb1指代目的表，将查询结果保存到其中。<br>如果用于保存查询结果的目的表已经存在，可以使用insert··· select 语句将查询结果复制到其中，假设dst_tb1中包含一个整数列i 和 一个字符串列s，下面的查询语句将src_tab1 表中val 和name 两列的所有行分别复制到 dst_tb1 的i 和 s两列中：<br>insert into dst_tb1 (i,s) select val, name from src_tb1;</p>
+<p>在sql语句中，向目的表插入的列数与源表查询结果的列数必须相等。并且目的表和源表之间的列对应关系必须按照sql语句中的出现顺序决定，而不是又列名确定。将一个表的所有的列复制到另外一个表中一种特殊情况，此时可以忽略列名，sql语句可以简写如下：<br>insert into dst_tb1 select * from src_tb1</p>
+<p>如果只要复制一行，在sql语句中加上一个where子句，对查找过程进行过程进行限制即可，如下：<br>inset into dst_tb1 select * from src_tb1<br>where val &gt; 100 and name like ‘A%’;</p>
+<p>其中的select子句也可以和普通的查询语句一样，使用表达式来计算值，例如，下面的sql语句计算src_ta1 中每一个name 出现的次数，然后将name和出现的次数保存到dst_tb1中：<br>inset into dst_tb1(i,s) select count(*), name from src_tb1 group by name;</p>
+<p>如果目的表事先不存在，就需要首先使用create table 语句创建一个，然后再使用insert···select语句向新创建的目的表插入查询结果。也可以使用一个sql语句完成：<br>create table···select,该语句直接根据查询结果创建目的表，如下语句创建了目的表dst_tb1,同时将src_tb1的内容复制到其中：<br>create table dst_tb1 select * from src_tb1;</p>
+<p>Mysql 根据src_tb1 表查询结果中的列名、列数和列类型创建目的表dst_tb1.如果只需要从源表中复制部分列，则需要在select子句中加上where子句；如果需要创建一个空的目的表，只需要使用一个使得查询结果永远为空的where子句即可：<br>create table dst_tb1 select * from src_tb1 where 0;</p>
+<p>如果只复制部分列，在需要在select 子句中指明需要复制的列名。例如，src_tb1 中有列a、b、c和d，你可以只复制b、和d两列目的表：<br>create table dst_tb1 select b,d from scr_tb1;</p>
+<p>如果希望目的表中列的顺序和源表不同，则需要在select子句中显式的指明各列间顺序。如果源表中列a、b和c 的的顺序出现，而用户希望复制完成之后各列在目的表中出现顺序为c、a和b，可以使用如下语句：<br>create table dst_tb1 select c,a,b from src_tb1;</p>
+<p>在create table 子句部分插入列定义（类似于创建表时的列定义），可以在目的表中加入查询结果中没有的列，如下语句，在dst_tb1 中创建了4列，其中a、b和c这3列来自源表查询结果，同时加上了定义为AUTO_INCREMENT的id列：</p>
+<p>CREATE TABLE <code>cookbook</code>.<code>dst_tb1</code> (<br>    id INT NOT NULL AUTO_INCREMENT,<br>    PRIMARY KEY (id)<br>)<br>select a,b,c from src_tb1;<br>上列中，目的表dst_tb1中4列出现顺序为id、a、b、c。其中，a、b、c散列根据源表查询结果赋值，而id列值从1开始连续自加，为行序号。<br>如果查询子句中需要一个表达式计算某列值···<br>对于新创建的目的表MySQL不能确定某些列属性，例如列索引和默认值可以使用以下几个技巧···</p>
+<h1 id="4-3使用临时表"><a href="#4-3使用临时表" class="headerlink" title="4.3使用临时表"></a>4.3使用临时表</h1><p>问题：如何创建仅供临时使用，并且自动删除的表<br>解决方案：创建TEMPORARY表，并在使用结束后让MySQL自动删除该表。<br>讨论：有的操作可能需要临时表，并在使用结束后删除，用户在使用完临时表之后，使用drop table 语句来删除该表，另一个选择是使用 create temporary table语句，这个sql语句的功能和create table 类似，只不过前者用来创建一张临时表，在和mysql服务器的连接关闭之后，创建的临时表被自动删除。</p>
+<p>普通的建表语句：<br>create tempporary table tb1_name (··· 列定义···)<br>克隆表：<br>create tempporary table new_table like original_table;<br>根据查询结果建表：<br>create temporary  table tab1_name select ···</p>
+<p>由于临时表与各个数据库连接相关的，所以不用的数据库连接可以创建同名的临时表，这些表之间不会相互影响，因此在此应用程序中需要创建临时表时，只需要保证临时表名在应用程序内部唯一即可，而不用关心所使用的临时表名在数据库服务器上是否唯一。<br>临时表另一个特性，临时表可以使用普通表的表名，这样做的结果是，在临时表的生命周期内，它将屏蔽与之同名的普通表。可以创建一个普通表的临时备份，对临时表可以做任意操作，而不影响真实数据，下面的delete语句从一个临时表中删除了一些行，但是对应的普通表没有任何影响。<br>mysql&gt; create temporary table mail select * from mail;<br>Query OK, 16 rows affected (0.02 sec)<br>Records: 16  Duplicates: 0  Warnings: 0</p>
+<p>mysql&gt; select count(<em>) from mail;<br>+———-+<br>| count(</em>) |<br>+———-+<br>|       16 |<br>+———-+<br>1 row in set (0.00 sec)</p>
+<p>mysql&gt; delete from mail;<br>Query OK, 16 rows affected (0.02 sec)</p>
+<p>mysql&gt; select count(<em>) from mail;<br>+———-+<br>| count(</em>) |<br>+———-+<br>|        0 |<br>+———-+<br>1 row in set (0.00 sec)</p>
+<p>mysql&gt; drop table mail;<br>Query OK, 0 rows affected (0.02 sec)</p>
+<p>mysql&gt; select count(<em>) from mail;<br>+———-+<br>| count(</em>) |<br>+———-+</p>
+<p>尽管使用 create temporary table 创建的临时表能带来很多便利，但有些情况也得小心使用：<br>    • 只有在最后一次使用后， 数据库才会自动删除临时表，如果一个临时表在一个数据库内连接多次重复使用，那么每一次重复使用之前先使用drop table 显示地删除该临时表（在一个数据库连接中，如果重复两次使用同一个表面创建临时表，而未删除第一次创建的临时表，将导致数据库错误）<br>    • 应用程序中使用一个与普通表同名的临时表时，应用程序只会对该临时表就行修改，但是如果数据库连接错误断开，而所使用的应用程序自动重新创建了数据库连接，那么以后对数据库的修改，都将直接用户普通表，而不是临时表（已经被自动删除）<br>    • 有的应用程序API提供数据库的持久连接或者连接池，可以使用这些技术保证临时表的持久性。因为这样的数据连接，在应用程序运行之后并不会断开，而会被其他的程序继续使用，在用户的应用程序关闭之后，就不能再操作所创建的临时表，也就意味着不被显式删除，它将一直存在于数据库。为此如果程序需要使用类似的数据库连接，并需要创建自己的临时表，比较明智的做法是在创建临时表之前执行下面的语句：<br>     drop temporary table if exists tb1_name<br>    temporary 关键字用在这里，可以避免错误的删除同名的普通表，例如，临时表tb1_name 已经被删除，而数据库中存在一个tb1_name 的普通表，如果不使用temporary关键字，那么普通表tb1_name 将被删除。</p>
+<h1 id="4-4检查或者改变某个表的存储引擎"><a href="#4-4检查或者改变某个表的存储引擎" class="headerlink" title="4.4检查或者改变某个表的存储引擎"></a>4.4检查或者改变某个表的存储引擎</h1><p>问题： 检测一张表使用哪个存储引擎，以便你确定哪些引擎功能可用，或者，你发现另外的引擎具有的功能特性更适合你对某表的操作，因此你需要更改一张表所用的存储引擎。<br>解决方案：为了确定一张表所用的存储引擎，你可以使用很多语句中的任意一个，使用含有engine 子句的alter table 语句来更改表引擎。<br>讨论：MySQL支持多种存储引擎，每一种都有不同的特性，例如，InnoDB和BDB支持事务，而MyISAM不支持事务，如果你需要确定一张表是否支持事务的话，就确定它所使用的引擎。如果你需要在一个事务中使用该表，但是对应的引擎不支持，你可以将改变转换到一个支持事务的引擎上。<br>检测INFOMSTION_SCHEMA，或者show table status ,或者 show create table 语句，来确定一张表当前使用的引擎，如下获取mail 表的信息：</p>
+<p>mysql&gt; show table status from cookbook where name = ‘mail’;<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>| Name | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation       | Checksum | Create_options | Comment |<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>| mail | InnoDB |      10 | Dynamic    |   16 |           1024 |       16384 |               0 |        16384 |         0 |           NULL | 2018-04-28 13:23:17 | NULL        | NULL       | utf8_general_ci |     NULL |                |         |<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>1 row in set (0.02 sec)</p>
+<p>mysql&gt; show table status like ‘mail’;<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>| Name | Engine | Version | Row_format | Rows | Avg_row_length | Data_length | Max_data_length | Index_length | Data_free | Auto_increment | Create_time         | Update_time | Check_time | Collation       | Checksum | Create_options | Comment |<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>| mail | InnoDB |      10 | Dynamic    |   16 |           1024 |       16384 |               0 |        16384 |         0 |           NULL | 2018-04-28 13:23:17 | NULL        | NULL       | utf8_general_ci |     NULL |                |         |<br>+——+——–+———+————+——+—————-+————-+—————–+————–+———–+—————-+———————+————-+————+—————–+———-+—————-+———+<br>1 row in set (0.00 sec)</p>
+<p>mysql&gt; show create table mail;<br>+——-+————————————————————————————————————————————————————————————————————————————————————————————————-+<br>| Table | Create Table                                                                                                                                                                                                                                                                                    |<br>+——-+————————————————————————————————————————————————————————————————————————————————————————————————-+<br>| mail  | CREATE TABLE <code>mail</code> (<br>  <code>t</code> datetime DEFAULT NULL,<br>  <code>srcuser</code> varchar(8) DEFAULT NULL,<br>  <code>srchost</code> varchar(20) DEFAULT NULL,<br>  <code>dstuser</code> varchar(8) DEFAULT NULL,<br>  <code>dsthost</code> varchar(20) DEFAULT NULL,<br>  <code>size</code> bigint(20) DEFAULT NULL,<br>  KEY <code>t</code> (<code>t</code>)<br>) ENGINE=InnoDB DEFAULT CHARSET=utf8 |<br>+——-+————————————————————————————————————————————————————————————————————————————————————————————————-+<br>1 row in set (0.00 sec)</p>
+<p>使用alter table以及一个engine子句，来改变一张表所用的引擎，例如下面使mail表使用InnoDB引擎：<br>alter table mail engine = InnoDB；<br>改变一个很大的表所用的存储引擎可能会消耗很长时间，并花费大量CPU以及I/O资源。</p>
+<h1 id="4-5生成唯一的表名"><a href="#4-5生成唯一的表名" class="headerlink" title="4.5生成唯一的表名"></a>4.5生成唯一的表名</h1><p>你需要创建一张表，并保证其表名不与现有表名重复（如何保证表名唯一？）</p>
+<p>如果你创建一张temporary 表，就无所谓是非重复了，否则，就试着生成一个客户端唯一的值，并将该值合并到表名中。<br>讨论： MySQL 是一个多客户端服务器，因此一个创建临时表的脚本可能被多个客户端同时执行，你必须避免多个同时执行的脚本所创建的表名出现冲突。如果这个脚步使用create temporary table 来创建表，不会有问题，因为不同的客户端可以没有冲突地创建重名的临时表。</p>
+<p>如果不想使用temporary 表，最好保证每个客户端使用脚步创建的表名都是唯一的，并删除不再继续使用的临时表。为了做到这一点，在表名中加入对于每一个脚本调用都唯一的值，一个timestamp值不能胜任，因为很有可能，两个脚本在同一时刻被调用，一个随机数可能会好点，例如，在JAVA中，你可以使用 java.util.random()类来创建表名</p>
+<p>Random rand = new Random();<br>int n = rand.nexInt()<br>n = Math.abs(n);<br>String tblName = “tmp<em>tbl</em>“ + n;</p>
+<p>不幸的是，随机数只在一定程度上避免了表名冲突，进程号（PID）是唯一值的一个更好来源，PID不断被利用，但对同一时刻的两个进程绝不会相同，因此对于一组正在执行的进程而言，给定PID值是肯定唯一的。你可以运用这点生成唯一表名：<br>perl：<br>Ruby：<br>PHP：<br>Python：<br>import os<br>tbl_name = “tmp<em>tbl</em>%d” % os.getpid()</p>
+<p>就算你使用类似PID这样，对一个给定的脚本调用保证唯一的值来生成唯一的表名，所生成的表名仍有可以于现在的表名冲突，这样的情况可能出现在以前的一个脚本调用过程使用相同的PID，创建一个一样的表名，但这个进程在在删除所创建的临时表之外就崩溃了，另一个方面这样的表已经不再使用了，因为创建它的进程已经消失，这种情况如果这样的表确实存在，使用下面的语句安全的删除它；<br>drop  table if exists tbl_name;</p>
+<p>然后你就可以继续创建新表了。<br>连接标识符是唯一值的另一个来源，MySQL重用这些值，但是两个同时存在的服务器连接具有不同ID，执行下面的语句，获取你的连接ID：<br>select cinnection_ID();</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/MySQL_4_从表中查询/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="平林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平林的平常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/06/MySQL_4_从表中查询/" itemprop="url">MySQL_4_从表中查询.md</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T09:22:32+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/06/MySQL_4_从表中查询/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/06/MySQL_4_从表中查询/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="3-0-引言"><a href="#3-0-引言" class="headerlink" title="3.0 引言"></a>3.0 引言</h1><p>select允许你对行查询的几个方面进行控制：<br>所要查询的表<br>所要查询的行和列<br>重命名查询结果列<br>对查询结果进行排序</p>
+<h1 id="3-1-制定查询列-从指定列中查询"><a href="#3-1-制定查询列-从指定列中查询" class="headerlink" title="3.1 制定查询列/从指定列中查询"></a>3.1 制定查询列/从指定列中查询</h1><p>讨论 最简单的方法是使用 select <em> from tb_name 获取一个 数据库里的每一列信息，其中 “ </em> ” 说明对数据库中的所有列进行查询，但是查询结果不能安装用户指定的任意顺序显示，要达到这一目的，可以使用一下的语句指定查询列。<br>显示地查询列的另一个好处在于，在查询结果中可以只显示用户所关注的列，而不是显示每一个列的信息，例如：</p>
+<h1 id="3-2-指定查询行"><a href="#3-2-指定查询行" class="headerlink" title="3.2 指定查询行"></a>3.2 指定查询行</h1><p>使用where语句设定查询条件，使得查询结果只包含符合查询条件的行，例如指定查询生活在某个城市的客户信息，或者状态为“finished”的任务。<br>where srchost = ‘venus’;<br>where srchost like ‘s%’;<br>where srchost = ‘barb’ and dstuser = ‘tricia’;</p>
+<h1 id="3-3-格式化显示查询结果"><a href="#3-3-格式化显示查询结果" class="headerlink" title="3.3 格式化显示查询结果"></a>3.3 格式化显示查询结果</h1><p>问题：自定义查询结果（列名或者对应值）<br>使用AS name 子句来指定列别名</p>
+<h1 id="3-4-使用别名来简化程序"><a href="#3-4-使用别名来简化程序" class="headerlink" title="3.4 使用别名来简化程序"></a>3.4 使用别名来简化程序</h1><h1 id="3-5-合并多列来构建复合值"><a href="#3-5-合并多列来构建复合值" class="headerlink" title="3.5 合并多列来构建复合值"></a>3.5 合并多列来构建复合值</h1><p>查询结果需要组合表中多个不同的列值来获得<br>使用concat（）函数，<br>mysql&gt; select DATE_FORMAT(t,’%M %e,%Y’) AS data_sent,<br>    -&gt; concat(srcuser, ‘@’, srchost) AS sender,<br>    -&gt; concat(datuser, ‘@’, dathost) AS recipient,<br>    -&gt; size from mail;</p>
+<h1 id="3-6-where表达式中的别名"><a href="#3-6-where表达式中的别名" class="headerlink" title="3.6 where表达式中的别名"></a>3.6 where表达式中的别名</h1><p>mysql&gt; select t,srcuser, dstuser, size/1024 AS kilobytes from mail where size/1024 &gt; 500<br>    -&gt; \g</p>
+<h1 id="3-7-调试比较表达式"><a href="#3-7-调试比较表达式" class="headerlink" title="3.7 调试比较表达式"></a>3.7 调试比较表达式</h1><p>mysql&gt; select * from mail where srcuser &lt; ‘c’ and size &gt; 5000;<br>+———————+———+———+———+———+——-+<br>| t                   | srcuser | srchost | dstuser | dsthost | size  |<br>+———————+———+———+———+———+——-+<br>| 2014-05-11 10:15:08 | barb    | saturn  | tricia  | mars    | 58274 |<br>| 2014-05-14 14:42:21 | barb    | venus   | barb    | venus   | 98151 |<br>+———————+———+———+———+———+——-+<br>2 rows in set (0.00 sec)</p>
+<p>mysql&gt; select srcuser, srcuser &lt; ‘c’ ,size , size &gt; 5000 from mail;<br>+———+—————+———+————-+<br>| srcuser | srcuser &lt; ‘c’ | size    | size &gt; 5000 |<br>+———+—————+———+————-+<br>| barb    |             1 |   58274 |           1 |<br>| tricia  |             0 |  194925 |           1 |<br>| phil    |             0 |    1048 |           0 |<br>| barb    |             1 |     271 |           0 |<br>| gene    |             0 |    2291 |           0 |<br>| phil    |             0 |    5781 |           1 |<br>| barb    |             1 |   98151 |           1 |<br>| tricia  |             0 | 2394482 |           1 |<br>| gene    |             0 |    3824 |           0 |<br>| phil    |             0 |     978 |           0 |<br>| gene    |             0 |  998532 |           1 |<br>| gene    |             0 |    3856 |           0 |<br>| gene    |             0 |     613 |           0 |<br>| phil    |             0 |   10294 |           1 |<br>| phil    |             0 |     873 |           0 |<br>| gene    |             0 |   23992 |           1 |<br>+———+—————+———+————-+<br>16 rows in set (0.00 sec)</p>
+<h1 id="3-8-使查询结果唯一化"><a href="#3-8-使查询结果唯一化" class="headerlink" title="3.8 使查询结果唯一化"></a>3.8 使查询结果唯一化</h1><p>mysql&gt; select srcuser from mail;<br>+———+<br>| srcuser |<br>+———+<br>| barb    |<br>| tricia  |<br>| phil    |<br>| barb    |<br>| gene    |<br>| phil    |<br>| barb    |<br>| tricia  |<br>| gene    |<br>| phil    |<br>| gene    |<br>| gene    |<br>| gene    |<br>| phil    |<br>| phil    |<br>| gene    |<br>+———+<br>16 rows in set (0.00 sec)</p>
+<p>mysql&gt; select distinct srcuser from mail;<br>+———+<br>| srcuser |<br>+———+<br>| barb    |<br>| tricia  |<br>| phil    |<br>| gene    |<br>+———+<br>4 rows in set (0.01 sec)</p>
+<h1 id="3-9-如何处理-null值"><a href="#3-9-如何处理-null值" class="headerlink" title="3.9 如何处理 null值"></a>3.9 如何处理 null值</h1><p>如何将列值与NULL值比较呢<br>选择使用合适的比较操作符： is null  、is not null或者 &lt;=&gt;</p>
+<p>没有样本表暂时跳过</p>
+<h1 id="3-10-在用户程序中使用NULL-作为比较参数"><a href="#3-10-在用户程序中使用NULL-作为比较参数" class="headerlink" title="3.10 在用户程序中使用NULL 作为比较参数"></a>3.10 在用户程序中使用NULL 作为比较参数</h1><p>···从另一个角度来避免这个问题，在定义数据库时，如果不是特别需要，就不允许列值为NULL。<br>3.11 结果集序列<br>在查询语句中使用一个ORDER BY 子句对查询结果进行排序，可以在order by子句中指定数据库的一列或者多列作为排序依据，<br>mysql&gt; select * from mail where size &gt; 5000 order by size ;<br>+———————+———+———+———+———+———+<br>| t                   | srcuser | srchost | dstuser | dsthost | size    |<br>+———————+———+———+———+———+———+<br>| 2014-05-14 11:52:17 | phil    | mars    | tricia  | saturn  |    5781 |<br>| 2014-05-16 23:04:19 | phil    | venus   | barb    | venus   |   10294 |<br>| 2014-05-19 22:21:51 | gene    | saturn  | gene    | venus   |   23992 |<br>| 2014-05-11 10:15:08 | barb    | saturn  | tricia  | mars    |   58274 |<br>| 2014-05-14 14:42:21 | barb    | venus   | barb    | venus   |   98151 |<br>| 2014-05-12 12:48:13 | tricia  | mars    | gene    | venus   |  194925 |<br>| 2014-05-15 10:25:52 | gene    | mars    | tricia  | saturn  |  998532 |<br>| 2014-05-14 17:03:01 | tricia  | saturn  | phil    | venus   | 2394482 |<br>+———————+———+———+———+———+———+<br>8 rows in set (0.00 sec)</p>
+<p>在order by 子句的最后，即定义的排序依据的列名之后加上关键字DESC使查询结果按逆序排序。</p>
+<h1 id="3-12-使用视图来简化查询"><a href="#3-12-使用视图来简化查询" class="headerlink" title="3.12 使用视图来简化查询"></a>3.12 使用视图来简化查询</h1><p>mysql&gt; select<br>    -&gt; date_format(t,’%M %e %Y’) as date_sent,<br>    -&gt; concat(srcuser,’@’,srchost) as sender,<br>    -&gt; concat(dstuser,’@’,dsthost) as recipient,<br>    -&gt; size from mail;<br>+————-+—————+—————+———+<br>| date_sent   | sender        | recipient     | size    |<br>+————-+—————+—————+———+<br>| May 11 2014 | barb@saturn   | tricia@mars   |   58274 |<br>| May 12 2014 | tricia@mars   | gene@venus    |  194925 |<br>| May 12 2014 | phil@mars     | phil@saturn   |    1048 |<br>| May 12 2014 | barb@saturn   | tricia@venus  |     271 |<br>| May 14 2014 | gene@venus    | barb@mars     |    2291 |<br>| May 14 2014 | phil@mars     | tricia@saturn |    5781 |<br>| May 14 2014 | barb@venus    | barb@venus    |   98151 |<br>| May 14 2014 | tricia@saturn | phil@venus    | 2394482 |<br>| May 15 2014 | gene@mars     | gene@saturn   |    3824 |<br>| May 15 2014 | phil@venus    | phil@venus    |     978 |<br>| May 15 2014 | gene@mars     | tricia@saturn |  998532 |<br>| May 15 2014 | gene@saturn   | gene@mars     |    3856 |<br>| May 16 2014 | gene@venus    | barb@mars     |     613 |<br>| May 16 2014 | phil@venus    | barb@venus    |   10294 |<br>| May 19 2014 | phil@mars     | tricia@saturn |     873 |<br>| May 19 2014 | gene@saturn   | gene@venus    |   23992 |<br>+————-+—————+—————+———+<br>16 rows in set (0.00 sec)</p>
+<p> 当需要频繁使用类似上例的查询时，就需要每次都在查询语句中重复写入类似复杂的运算表达式，在这样的情况下，就可以使用视图来简化查询语句，视图是一个虚拟的数据库，它并不包含任何实际的数据，实际上，一个视图可以看作一个特定的select语句，下面的视图mail_view 与定义它的select语句是等价的：<br>mysql&gt; create view mail_view as<br>    -&gt; select<br>    -&gt; date_format(t, ‘%M %e %Y’) as date_sent,<br>    -&gt; concat(srcuser, ‘@’, srchost) as sender,<br>    -&gt; concat(dstuser, ‘@’, dsthost) as recipient,<br>    -&gt; size from mail;<br>Query OK, 0 rows affected (0.02 sec)</p>
+<p>mysql&gt; select date_sent, sender, size from mail_view<br>    -&gt; where size &gt; 100000 order by size;<br>+————-+—————+———+<br>| date_sent   | sender        | size    |<br>+————-+—————+———+<br>| May 12 2014 | tricia@mars   |  194925 |<br>| May 15 2014 | gene@mars     |  998532 |<br>| May 14 2014 | tricia@saturn | 2394482 |<br>+————-+—————+———+<br>3 rows in set (0.00 sec)</p>
+<h1 id="3-13-多表查询"><a href="#3-13-多表查询" class="headerlink" title="3.13 多表查询"></a>3.13 多表查询</h1><p>需要从多个表中查询数据<br>使用联合(join)操作,或者使用子查询<br>没有相应样本表</p>
+<h1 id="3-14-从查询结果集头或者尾取出部分行"><a href="#3-14-从查询结果集头或者尾取出部分行" class="headerlink" title="3.14 从查询结果集头或者尾取出部分行"></a>3.14 从查询结果集头或者尾取出部分行</h1><p>问题：如何才能只显示查询结果的部分行，例如第一行或者最后5行<br>解决方案： 使用limit 子句，并且经常要跟order by 子句配合使用<br>LIMIT子句主要用于以下类型的查询：<br>当需要查询的结果是：第一个或者最后一个，最大或者最小，最新或者最旧，最便宜或者最贵。<br>当查询结果行数较多，将查询结果划分小块，每次只取出其中一块返回显示给用户，这种技术在WEB中比较常见：将一个跨越多个页面的查询结果划分为多次显示，每次显示一个页面。每次显示查询结果的一部分，可以使查询结果更具有可读性<br>mysql&gt; select * from profile order by birth limit 1;<br>+—-+——–+————+——-+—————-+——+<br>| id | name   | birth      | color | foods          | cats |<br>+—-+——–+————+——-+—————-+——+<br>|  7 | Joanna | 1952-08-20 | green | lutefisk,fadge |    0 |<br>+—-+——–+————+——-+—————-+——+<br>1 row in set (0.00 sec)</p>
+<p>当查询结果无序的，所以从查询结果中取出头N行可能无意义，更常见的结果首先使用order by 子句对查询结果进行排序，然后再使用limit子句从查询结果中取出最大或者最小特征的行，<br>例如<br>mysql&gt; select * from profile order by birth limit 1;<br>+—-+——–+————+——-+—————-+——+<br>| id | name   | birth      | color | foods          | cats |<br>+—-+——–+————+——-+—————-+——+<br>|  7 | Joanna | 1952-08-20 | green | lutefisk,fadge |    0 |<br>+—-+——–+————+——-+—————-+——+<br>1 row in set (0.00 sec)</p>
+<p>如果要获取查询结果的最后N行，则可以对查询结果进行逆序排序，例如需要查找最晚出生的人，查询语句类似上面，不同的是对查询结果按照birth列值递减排序.<br>mysql&gt; select * from profile order by birth desc limit 1;<br>+—-+——-+————+——-+—————+——+<br>| id | name  | birth      | color | foods         | cats |<br>+—-+——-+————+——-+—————+——+<br>|  3 | Ralph | 1973-11-02 | red   | eggroll,pizza |    4 |<br>+—-+——-+————+——-+—————+——+<br>1 row in set (0.00 sec)</p>
+<p>按照历年内最早或者最迟的出生日，根据birth值的月份和日期进行排序，则可以可以将查询结果先根据生日的月和日进行排序：<br>mysql&gt; select name , date_format(birth, ‘%m-%d’) as birthday<br>    -&gt; from profile order by birthday limit 1;<br>+——-+———-+<br>| name  | birthday |<br>+——-+———-+<br>| Henry | 02-14    |<br>+——-+———-+<br>1 row in set (0.00 sec)</p>
+<p>如果不使用Limit子句，而是人为的忽略除了第一行外的查询结果，用户也一样可以得到需要的信息，使用limit子句的优势在于，数据库服务器只通过网络向用户返回查询结果中的一行，而不会返回其他行，这样避免了网络带宽的浪费，同是提高了用户程序的运行效率。<br>参考<br>limit同样应用于delete 和 update 语句，对所要删除或者修改的行进行限制，这种情况，limit子句和where子句组合使用可以有更好的效果，例如：一个数据库表中有5行一样的数据，其中4行是冗余的，此时可以在delect语句中使用一个where子句找到这5行，然后通过语句的最后加上limit 4 删除冗余的4行，这样可以保持数据库信息的唯一性。</p>
+<h1 id="3-15-在结果集中间选取部分行"><a href="#3-15-在结果集中间选取部分行" class="headerlink" title="3.15 在结果集中间选取部分行"></a>3.15 在结果集中间选取部分行</h1><p>Limit 子句可以接收两个参数，使用户可以获取一个查询结果中的任意部分行，这种情况limit两个参数分别指定了从查询结果的第几行开始返回，以及一共返回多少行。<br>mysql&gt; select * from profile order by birth limit 2,1;<br>+—-+———+————+——-+—————+——+<br>| id | name    | birth      | color | foods         | cats |<br>+—-+———+————+——-+—————+——+<br>|  4 | Lothair | 1963-07-04 | blue  | burrito,curry |    5 |<br>+—-+———+————+——-+—————+——+<br>1 row in set (0.00 sec)</p>
+<h1 id="3-16-选择合适的LIMIT参数"><a href="#3-16-选择合适的LIMIT参数" class="headerlink" title="3.16 选择合适的LIMIT参数"></a>3.16 选择合适的LIMIT参数</h1><p>样本表未特添加成功，暂时跳过</p>
+<h1 id="3-17-当LIMIT需要”错误”的排列顺序时做什么"><a href="#3-17-当LIMIT需要”错误”的排列顺序时做什么" class="headerlink" title="3.17 当LIMIT需要”错误”的排列顺序时做什么"></a>3.17 当LIMIT需要”错误”的排列顺序时做什么</h1><p>问题：limit 和 用于排序的 order by 配合使用，通常在查询中发挥作用，但是有时order by 子句得到的排序结果和你想要的结果相反。</p>
+<p>解决方案： 在子查询中使用limit子句取得所需的行，然后在外层查询中对子结果进行排序。</p>
+<p>讨论<br>如果希望得一个查询结果的最后4行记录，只需要将查询结果按照降序排列，然后使用limit 4 子句即可。<br>如从profile表中查询最晚出生的4个人：<br>mysql&gt; select name, birth from profile order by birth desc limit 4;<br>+——-+————+<br>| name  | birth      |<br>+——-+————+<br>| Ralph | 1973-11-02 |<br>| Sybil | 1970-04-13 |<br>| Nancy | 1969-09-30 |<br>| Aaron | 1968-09-17 |<br>+——-+————+<br>4 rows in set (0.00 sec)</p>
+<p>这样的查询方式，要求首先对查询结果进行降序排列，最后的查询结果也按照降序返回，如果要求结果按照升序排列如何处理？<br>方法一：使用两个查询语句。首先使用count（） 函数计算表中一共记录了几行数据。<br>mysql&gt; select count(<em>) from profile;<br>+———-+<br>| count(</em>) |<br>+———-+<br>|        8 |<br>+———-+<br>1 row in set (0.00 sec)</p>
+<p>然后，使用升序来排列查询结果，并使用带两个参数的LIMIT子句从排序结果中取出所需行。<br>mysql&gt; select name, birth from profile order by birth limit 4, 4;<br>+——-+————+<br>| name  | birth      |<br>+——-+————+<br>| Aaron | 1968-09-17 |<br>| Nancy | 1969-09-30 |<br>| Sybil | 1970-04-13 |<br>| Ralph | 1973-11-02 |<br>+——-+————+<br>4 rows in set (0.00 sec)</p>
+<p>这样的解决方法要求计算表中的总行数，然后还要计算从第几行开始返回结果，用户可能不想这么做，所以有了第二种方法：首先在一个子查询中使用limit子句取出所需的行，然后在外层查询中对该结果的排序，并返回用户。如下：<br>mysql&gt; select *from                                                                -&gt; (select name ,birth from profile order by birth desc limit 4) AS t<br>    -&gt; order by birth;<br>+——-+————+<br>| name  | birth      |<br>+——-+————+<br>| Aaron | 1968-09-17 |<br>| Nancy | 1969-09-30 |<br>| Sybil | 1970-04-13 |<br>| Ralph | 1973-11-02 |<br>+——-+————+<br>4 rows in set (0.00 sec)<br>(from : 后面加了空格再换行，粘贴后变的不规则)<br>在查询语句中，from 子句后面必须是表名，因此在上例中使用AS t 对子查询结果赋予别名，作为from的一个临时表名。</p>
+<h1 id="3-18从表达式中计算LIMIT值"><a href="#3-18从表达式中计算LIMIT值" class="headerlink" title="3.18从表达式中计算LIMIT值"></a>3.18从表达式中计算LIMIT值</h1><p>如何使用表达式计算LIMIT子句所使用的参数？<br>实际上，sql语句中，limit子句只能直接以数字作为参数，并不能使用表达式作为limit子句的参数，除非在应用程序中，使用用户程序语句计算出limit参数，然后再将结果插入到sql语句中。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/25/MySQL_3_2_使用Mysql客户端/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="平林">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="平林的平常">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/25/MySQL_3_2_使用Mysql客户端/" itemprop="url">MysqlCookbook-使用Mysql客户端2-2</a></h1>
         
 
         <div class="post-meta">
@@ -301,9 +615,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/25/MysqlCookbook-使用Mysql客户端2-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/25/MySQL_3_2_使用Mysql客户端/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/25/MysqlCookbook-使用Mysql客户端2-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/25/MySQL_3_2_使用Mysql客户端/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -393,7 +707,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/22/MySQL_3_1_基于客户端编程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="平林">
@@ -412,7 +726,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/" itemprop="url">MysqlCookbook_使用Mysql客户端1/2</a></h1>
+                <a class="post-title-link" href="/2018/02/22/MySQL_3_1_基于客户端编程/" itemprop="url">MysqlCookbook_使用Mysql客户端1/2</a></h1>
         
 
         <div class="post-meta">
@@ -443,9 +757,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/22/MysqlCookbook-使用Mysql客户端1-2/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/22/MySQL_3_1_基于客户端编程/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/22/MysqlCookbook-使用Mysql客户端1-2/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/22/MySQL_3_1_基于客户端编程/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -538,7 +852,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/Mysql-cookbook-内容摘要/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/20/MySQL_2_2_内容摘要/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="平林">
@@ -557,7 +871,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/20/Mysql-cookbook-内容摘要/" itemprop="url">Mysql cookbook 内容摘要</a></h1>
+                <a class="post-title-link" href="/2018/02/20/MySQL_2_2_内容摘要/" itemprop="url">Mysql cookbook 内容摘要</a></h1>
         
 
         <div class="post-meta">
@@ -588,9 +902,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/20/Mysql-cookbook-内容摘要/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/20/MySQL_2_2_内容摘要/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/20/Mysql-cookbook-内容摘要/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/20/MySQL_2_2_内容摘要/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -661,7 +975,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/Mysqlcookbook-序言/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/MySQL_2_1_序言/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="平林">
@@ -680,7 +994,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/19/Mysqlcookbook-序言/" itemprop="url">Mysqlcookbook 序言</a></h1>
+                <a class="post-title-link" href="/2018/02/19/MySQL_2_1_序言/" itemprop="url">Mysqlcookbook 序言</a></h1>
         
 
         <div class="post-meta">
@@ -711,9 +1025,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/19/Mysqlcookbook-序言/#comments" itemprop="discussionUrl">
+                <a href="/2018/02/19/MySQL_2_1_序言/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2018/02/19/Mysqlcookbook-序言/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2018/02/19/MySQL_2_1_序言/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1309,343 +1623,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/27/学习servlet遇到一些问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/27/学习servlet遇到一些问题/" itemprop="url">Servlet 一二点</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-27T00:00:00+08:00">
-                2017-09-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/09/27/学习servlet遇到一些问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/09/27/学习servlet遇到一些问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p>Java文件中文字符乱码</p>
-<ul>
-<li>a 编译器字符编码<br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fjy3ntf3p9j30gu06kdfy.jpg" alt="截图一"></li>
-<li>b servlet 解码<br>//响应的内容类型<br>response.setContentType(“text/html;charset=GBK”);<br>//设置解码方式<br>request.setCharacterEncoding(“GBK”);</li>
-</ul>
-</li>
-<li><p>数据库连接后查询失败</p>
-<ul>
-<li><p>报错提示有<br>  “The driver has not received any packets from the server.（驱动程序没有从服务器接收任何数据包）”<br>  <img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fjy3shl7m7j30n003kq3t.jpg" alt="报错截图"></p>
-<pre><code> // 连接数据库
-public Connection getConnection () throws Exception{
-        if (connection == null) {
-                Class.forName(this.driver);
-</code></pre><p>//            connection =  DriverManager.getConnection(url,username,this.password);</p>
-<pre><code>connection =  DriverManager.getConnection(url, username, this.password);
-}
-return  connection;
-}
-</code></pre><p>  //查询</p>
-<pre><code>public ResultSet query (String sql, Object... args) throws Exception {
-            PreparedStatement preparedStatement =  getConnection().prepareStatement(sql);
-
-        for (int i = 0; i &lt; args.length; i++) {
-        preparedStatement.setObject(i + 1, args[i]);
-        }
-            return preparedStatement.executeQuery();
-        }
-</code></pre></li>
-</ul>
-</li>
-</ul>
-<pre><code>ResultSet resultSet = dbDao.query(&quot;select password * from user_table&quot; + &quot;where username =?&quot;, name);
-</code></pre><ul>
-<li>IntelliJ Idea编译器开放BUG<ul>
-<li>使用测试Demo可以正常运行，问题消失，编译器正常。</li>
-</ul>
-</li>
-</ul>
-<p>用户提交姓名，性别等个人信息，通过action 提交用户数据到servlet进行处理，案例功能是显示用户提交的各个值，英文字符可以正常显示，但中文无法显示，查询相关资料显示，可能有两点原因造成。</p>
-<p>问题层出不穷，又发现一个来自JB编译器的一个BUG，编译运行时，tomcat无法正常启动，manager has finished in 103 ms， 在Stack Overflow了解到这是JB的一个开放BUG，替换JB里一个叫tomcatIntegretion.jar 文件可以解决问题。找到了可以替换的文件时，操蛋的事接着发生，Finder文件无法拖动，放在平时可以进入终端命令来移动替换文件，可是要替换的文件在Application包文件里<br> <img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fjy3g0kafsj30w20bs40n.jpg" alt="截图二">，🤣,人生多苦难，我的人生呀！（机器重启后恢复正常）</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/04/版本控制与部署/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="平林">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="平林的平常">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/04/版本控制与部署/" itemprop="url">版本控制与部署</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-04T12:31:29+08:00">
-                2017-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2017/07/04/版本控制与部署/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/07/04/版本控制与部署/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<blockquote>
-<p>在创建Ruby on Rails 项目的背景下使用并添加Git版本控制以及线上部署是比较关键的，项目在测试正常但在线上就会出现各种问题，为了能够快速定位问题所在，尽早部署发现的问题相对要好处理些。所以通过此文章记录，在Web开发如何使用Git 做版本控制，又如何将项目部署到线上环境。</p>
-</blockquote>
-</blockquote>
-<h3 id="一、使用-Git-做版本控制"><a href="#一、使用-Git-做版本控制" class="headerlink" title="一、使用 Git 做版本控制"></a>一、使用 Git 做版本控制</h3><h4 id="1-1-安装设置"><a href="#1-1-安装设置" class="headerlink" title="1.1 安装设置"></a>1.1 安装设置</h4><p>1.1.1 <code>$ rails _5.1.1_ new appname</code>// Rails 版本来创建应用的文件结构</p>
-<p>创建完新的Rails应用后，下一步使用Bundle安装和引入所需的gem，</p>
-<p>1.1.2 更改Sqlite3 gem 的位置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">group :development, :test do</div><div class="line">  gem &apos;sqlite3&apos;, &apos;1.3.12&apos;</div><div class="line">  gem &apos;byebug&apos;,  &apos;9.0.0&apos;, platform: :mri</div><div class="line">end</div></pre></td></tr></table></figure></p>
-<p>修改了应用默认使用的gem就需要再次使用<code>bundle install</code>。</p>
-<p><code>rails tset</code> （测试<br><code>rails server</code> （ 本地运行 </p>
-<p>1.1.3 创建基本的项目后添加Git</p>
-<p><code>$ git init</code> （初始化仓库<br><code>$ git add -A</code> （项目中的所有文件都放到仓库中</p>
-<blockquote>
-<blockquote>
-<p>这个命令会把当前目录中的所有文件都放到仓库中，但是匹配特殊文件 .gitignore中模式的文件除外。rails new 命令会自动生成一个适用于 Rails 项目的 .gitignore 文件，此外你还可以添加其他模式,加入仓库的文件一开始位于暂存区（staging area），这一区用于存放待提交的内容。执行 status 命令可以查看暂存区中有哪些文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">➜  sample_app git:(sign-up) ✗ git status</div><div class="line">On branch sign-up</div><div class="line">Changes not staged for commit:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)</div><div class="line">  (use &quot;git checkout -- &lt;file&gt;...&quot; to discard changes in working directory)</div><div class="line"></div><div class="line">	modified:   app/assets/stylesheets/custom.scss</div><div class="line">	modified:   app/controllers/user_controller.rb</div><div class="line">	modified:   app/helpers/user_helper.rb</div><div class="line">	modified:   app/views/layouts/application.html.erb</div><div class="line">	modified:   app/views/user/new.html.erb</div><div class="line">	modified:   config/routes.rb</div><div class="line">Untracked files:</div><div class="line">  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)</div><div class="line">	app/views/user/show.html.erb</div><div class="line">no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</div></pre></td></tr></table></figure></p>
-</blockquote>
-</blockquote>
-<p>1.1.4 保存改动命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commint -m &quot;Initialize repository&quot;</div></pre></td></tr></table></figure>
-<h4 id="1-2-Bitbucket"><a href="#1-2-Bitbucket" class="headerlink" title="1.2 Bitbucket"></a>1.2 Bitbucket</h4><blockquote>
-<blockquote>
-<p>我们已经把项目纳入 Git 版本控制系统了，接下来可以把代码推送到 Bitbucket。这是一个专门用来托管和分享 Git 仓库的网站。</p>
-</blockquote>
-</blockquote>
-<p>1.2.1 设置账号公钥<br><code>$ cat ~/.ssh/id_rsa.pub</code> 输入文本粘贴到账号SSH公钥</p>
-<p>在bitbucket创建新的仓库获得仓库地址后<br><code>$ git remote add origin git@bitbucket.org:railstutorial/hello_app.git</code></p>
-<p>第一部分就完成了。</p>
-<h4 id="1-3-分支、编辑、提交、合并"><a href="#1-3-分支、编辑、提交、合并" class="headerlink" title="1.3 分支、编辑、提交、合并"></a>1.3 分支、编辑、提交、合并</h4><p>1.3.1<br>创建一个新主题分支（topic branch）：<br><code>$ git checkout -b modify-README</code><br>1.3.2<br>编辑一些文件后，在Atom编译器里文件名会显示黄色。<br>添加新的文件后，文件名是绿色。<br>1.3.3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Improve the README file&quot;</div></pre></td></tr></table></figure></p>
-<p>1.3.4 切换<br>我们已经改完了，现在可以把结果合并（merge）到主分支了：<br><code>$ git checkout master</code> 切换到主分支<br><code>$ git merge modify-README</code>  合并分支</p>
-<p>1.3.5 合并</p>
-<blockquote>
-<blockquote>
-<p>  合并之后，我们可以清理一下分支——如果主题分支不用了，可以使用 git branch -d 命令将其删除：<br><code>$ git branch -d modify-README</code></p>
-<p> 还可以使用 git branch -D 命令放弃主题分支中的改动：</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">仅作演示之用，如果没搞砸，千万别这么做</div><div class="line">$ git checkout -b topic-branch</div><div class="line">$ really screw up the branch</div><div class="line">$ git add -A</div><div class="line">$ git commit -a -m &quot;Make major mistake&quot;</div><div class="line">$ git checkout master</div><div class="line">$ git branch -D topic-branch</div></pre></td></tr></table></figure>
-<p>1.3.6 推送<br><code>$ git push</code> </p>
-<h3 id="二、部署"><a href="#二、部署" class="headerlink" title="二、部署"></a>二、部署</h3><h4 id="2-1-搭建-Heroku-部署环境"><a href="#2-1-搭建-Heroku-部署环境" class="headerlink" title="2.1 搭建 Heroku 部署环境"></a>2.1 搭建 Heroku 部署环境</h4><blockquote>
-<blockquote>
-<p>Heroku 使用 PostgreSQL[18] 数据库，因此我们要在生产环境安装 pg gem，这样 Rails 才能与 PostgreSQL 通信：</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">group :production do</div><div class="line">  gem &apos;pg&apos;, &apos;0.21.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
-<blockquote>
-<blockquote>
-<p>为了准备好部署环境，下面要执行 bundle install 命令，并且指定一个特殊的选项，禁止在本地安装生产环境使用的 gem（即 pg）：</p>
-</blockquote>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ bundle install --without production</div></pre></td></tr></table></figure>
-<p>提交这次改动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git commit -a -m &quot;Update Gemfile for Heroku&quot;</div></pre></td></tr></table></figure></p>
-<h4 id="2-2-Heroku-部署应用"><a href="#2-2-Heroku-部署应用" class="headerlink" title="2.2 Heroku 部署应用"></a>2.2 Heroku 部署应用</h4><p><code>$ heroku login</code>  输入账号邮箱及密码<br><code>$ heroku keys:add</code> 添加密钥<br><code>$ heroku create</code>  在Heroku中创建应用并返回地址<br><code>$ git push heroku master</code>  使用 Git 把 Heroku推送到主分支 中</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1695,7 +1672,7 @@ return  connection;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
